@@ -3,6 +3,9 @@
 把 [qianguyihao/Mac-list](https://github.com/qianguyihao/Mac-list) 的 Markdown 清单转换成可公开访问的网站。
 零第三方依赖：生成器只用 Python 标准库，产出的每个 HTML 都自带样式与数据，双击 `docs/index.html` 即可离线打开。
 
+> **已发布**：https://oscargwstudio.github.io/Mac-list/
+> 对应 fork：[OscargwStudio/Mac-list](https://github.com/OscargwStudio/Mac-list)，Pages 使用 GitHub Actions（`build_type: workflow`）自动构建，每次 push 到 `master` 会重新解析 Markdown 并部署。
+
 ## 产物
 
 | 路径 | 说明 |
