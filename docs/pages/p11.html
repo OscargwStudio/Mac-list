@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>虚拟机 · Mac 清单</title>
+<meta name="theme-color" content="#f6f7f9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='38' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--surface-2:#fbfcfd;--border:#e4e7ec;--border-2:#eef0f3;
+--text:#1c2027;--text-2:#4b5563;--muted:#7a8492;--accent:#2563eb;--accent-soft:#eef4ff;
+--shadow:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.04);
+--radius:12px;--sidebar:246px;--header:64px}
+[data-theme="dark"]{--bg:#111418;--surface:#1a1f26;--surface-2:#1e242c;--border:#2b323c;--border-2:#252c35;
+--text:#e9edf2;--text-2:#b6bfcb;--muted:#8b95a3;--accent:#6ea8ff;--accent-soft:#1b2a44;
+--shadow:0 1px 2px rgba(0,0,0,.2),0 6px 18px rgba(0,0,0,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:132px}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+::selection{background:#cfe0ff;color:#102a58}
+
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 88%,transparent);
+backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1400px;margin:0 auto;height:var(--header);padding:0 28px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;
+font-size:17px;background:linear-gradient(140deg,#3b82f6,#1e40af);box-shadow:0 3px 10px rgba(37,99,235,.25)}
+.brand-t{font-size:16px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand-s{font-size:12px;color:var(--muted);white-space:nowrap}
+.topbar-sp{flex:1}
+.stat{font-size:12px;color:var(--muted);white-space:nowrap}
+.stat b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.icon-btn{width:34px;height:34px;border:1px solid var(--border);background:var(--surface);border-radius:9px;
+display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:.15s}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gh-btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid var(--border);
+border-radius:9px;background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-2);transition:.15s}
+.gh-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.menu-btn{display:none}
+.searchbar{position:sticky;top:var(--header);z-index:45;background:var(--bg);border-bottom:1px solid var(--border)}
+.searchbar-in{max-width:1400px;margin:0 auto;padding:12px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:460px}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#q{width:100%;height:38px;padding:0 62px 0 36px;border:1px solid var(--border);border-radius:10px;
+background:var(--surface);color:var(--text);outline:none;transition:.15s}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);
+border:1px solid var(--border);border-radius:5px;padding:1px 6px;background:var(--surface-2)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{height:30px;padding:0 12px;border:1px solid var(--border);background:var(--surface);border-radius:99px;
+font-size:12.5px;color:var(--text-2);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.result-count{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.result-count b{color:var(--accent);font-variant-numeric:tabular-nums}
+
+.doc-wrap{max-width:960px;margin:0 auto;padding:34px 28px 90px;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:36px}
+.article{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+padding:34px 38px;box-shadow:var(--shadow)}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--accent)}
+.article h1{font-size:26px;margin:0 0 8px;letter-spacing:-.4px}
+.article .meta{font-size:12px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.article h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-2)}
+.article h3{font-size:16px;margin:26px 0 10px}
+.article h4{font-size:14px;margin:20px 0 8px}
+.article p,.article li{color:var(--text-2);font-size:14px;line-height:1.85}
+.article ul,.article ol{padding-left:22px}
+.article li{margin:4px 0}
+.article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-color:#c9daff}
+.article blockquote{margin:14px 0;padding:10px 16px;background:var(--accent-soft);border-left:3px solid var(--accent);
+border-radius:0 8px 8px 0;color:var(--text-2)}
+.article pre{background:#0f172a;color:#e2e8f0;padding:16px 18px;border-radius:10px;overflow-x:auto;
+font-size:12.5px;line-height:1.7}
+.article pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+.article img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;margin:14px auto}
+.article figure{margin:16px 0;text-align:center}
+.article hr{border:0;border-top:1px solid var(--border);margin:26px 0}
+.table-wrap{overflow-x:auto;margin:14px 0}
+.article table{border-collapse:collapse;width:100%;font-size:13px}
+.article th,.article td{border:1px solid var(--border);padding:8px 11px;text-align:left}
+.article th{background:var(--surface-2);font-weight:650}
+.toc{position:sticky;top:calc(var(--header) + 80px);align-self:start;font-size:12.5px}
+.toc b{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.toc a{display:block;padding:4px 0 4px 10px;border-left:2px solid var(--border);color:var(--text-2);
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.toc a.lv3{padding-left:22px;font-size:12px;color:var(--muted)}
+.doc-nav{display:flex;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--border)}
+.doc-nav a{flex:1;padding:11px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+font-size:12.5px;color:var(--text-2)}
+.doc-nav a:hover{border-color:var(--accent);color:var(--accent)}
+.doc-nav small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+@media(max-width:900px){.doc-wrap{grid-template-columns:1fr;padding:20px 14px 60px}.toc{display:none}.article{padding:22px 18px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+<div class="brand"><div class="logo">M</div><div><div class="brand-t">Mac 清单</div><div class="brand-s">Mac 软件清单 &amp; 使用技巧</div></div></div>
+<div class="topbar-sp"></div>
+<button class="icon-btn" id="theme" title="切换深浅色" aria-label="切换主题"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+<a class="gh-btn" href="../index.html">← 返回清单</a>
+</div></header>
+<div class="doc-wrap">
+<article class="article">
+<div class="crumb"><a href="../index.html">首页</a> / 软件专题 / 虚拟机</div>
+<h1>虚拟机</h1><div class="meta">内容源自 qianguyihao/Mac-list · 02-其他软件/虚拟机.md</div>
+<div class="md-body"><h3 id="sec-0">VMware 虚拟机</h3>
+<p>安装包下载链接：&lt;http://xclient.info/s/vmware-fusion.html&gt;</p>
+<p>选择菜单栏「窗口 - 虚拟机资源库」，可以看到已经安装了哪些虚拟机镜像。</p>
+<h4 id="sec-1">VMware中安装Ubuntu 16.04</h4>
+<p>安装教程链接：<a href="http://blog.csdn.net/jackjia2015/article/details/50757430" target="_blank" rel="noopener noreferrer">手把手交大家在mac上用VMWare虚拟机装Linux-Ubuntu--及Ubuntu安装Vmware Tools</a></p>
+<p>Ubuntu虚拟机安装成功后，如果要更改配置，记得先将Ubuntu虚拟机关机，然后选择VMware的菜单栏「虚拟机- 设置- 处理器和内存」，然后进行更改。</p>
+<h3 id="sec-2">parallels desktop</h3>
+<p>下载链接：<a href="http://download.csdn.net/download/yuanfangdeqin/9870446" target="_blank" rel="noopener noreferrer">#</a>、<a href="http://download.csdn.net/detail/u011334396/9871702s" target="_blank" rel="noopener noreferrer">#</a>。</p>
+<p><strong>软件图标、文字太小的问题</strong>：</p>
+<p>在虚拟机parallels desktop中安装Win7后，发现软件的图标、文字很小，为了把图标调大一点，可以进行如下设置： &quot;操作--&gt;配置--&gt;硬件--&gt;图形&quot;，然后在分辨率这一栏选择&quot;缩放&quot;，而不是默认的“最适用于Retina显示器”。</p>
+<p>再次打开软件，就一切正常了(不过这个时候windows界面会明显感觉分辨率变低了，不过软件能开开心心正常使用啦～)</p>
+<p>参考链接：</p>
+<ul><li><a href="http://jingyan.baidu.com/article/5d368d1edf1bfa3f60c057b4.html" target="_blank" rel="noopener noreferrer">parallels desktop上装应用程序字体，图标太小</a></li></ul></div>
+<div class="doc-nav"><a href="p10.html"><small>← 上一篇</small>打造 Mac 下高颜值好用的终端环境</a><a href="p12.html" style="text-align:right"><small>下一篇 →</small>MacTips-千古壹号</a></div>
+</article>
+<aside class="toc"><b>本页目录</b><a class="lv3" href="#sec-0">VMware 虚拟机</a><a class="lv3" href="#sec-2">parallels desktop</a></aside>
+</div>
+<footer><div class="foot-in">内容源自 <a href="https://github.com/qianguyihao/Mac-list" target="_blank" rel="noopener noreferrer">qianguyihao/Mac-list</a>（作者：千古壹号），本站为非官方静态镜像。原仓库未声明开源许可证。</div></footer>
+<script>
+(function(){const d=document.documentElement,t=localStorage.getItem('ml-theme');
+if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))d.dataset.theme='dark';
+document.getElementById('theme').addEventListener('click',()=>{const x=d.dataset.theme==='dark';d.dataset.theme=x?'light':'dark';localStorage.setItem('ml-theme',x?'light':'dark');});})();
+</script>
+</body></html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>使用GitBook本地制作电子书 · Mac 清单</title>
+<meta name="theme-color" content="#f6f7f9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='38' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--surface-2:#fbfcfd;--border:#e4e7ec;--border-2:#eef0f3;
+--text:#1c2027;--text-2:#4b5563;--muted:#7a8492;--accent:#2563eb;--accent-soft:#eef4ff;
+--shadow:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.04);
+--radius:12px;--sidebar:246px;--header:64px}
+[data-theme="dark"]{--bg:#111418;--surface:#1a1f26;--surface-2:#1e242c;--border:#2b323c;--border-2:#252c35;
+--text:#e9edf2;--text-2:#b6bfcb;--muted:#8b95a3;--accent:#6ea8ff;--accent-soft:#1b2a44;
+--shadow:0 1px 2px rgba(0,0,0,.2),0 6px 18px rgba(0,0,0,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:132px}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+::selection{background:#cfe0ff;color:#102a58}
+
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 88%,transparent);
+backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1400px;margin:0 auto;height:var(--header);padding:0 28px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;
+font-size:17px;background:linear-gradient(140deg,#3b82f6,#1e40af);box-shadow:0 3px 10px rgba(37,99,235,.25)}
+.brand-t{font-size:16px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand-s{font-size:12px;color:var(--muted);white-space:nowrap}
+.topbar-sp{flex:1}
+.stat{font-size:12px;color:var(--muted);white-space:nowrap}
+.stat b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.icon-btn{width:34px;height:34px;border:1px solid var(--border);background:var(--surface);border-radius:9px;
+display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:.15s}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gh-btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid var(--border);
+border-radius:9px;background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-2);transition:.15s}
+.gh-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.menu-btn{display:none}
+.searchbar{position:sticky;top:var(--header);z-index:45;background:var(--bg);border-bottom:1px solid var(--border)}
+.searchbar-in{max-width:1400px;margin:0 auto;padding:12px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:460px}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#q{width:100%;height:38px;padding:0 62px 0 36px;border:1px solid var(--border);border-radius:10px;
+background:var(--surface);color:var(--text);outline:none;transition:.15s}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);
+border:1px solid var(--border);border-radius:5px;padding:1px 6px;background:var(--surface-2)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{height:30px;padding:0 12px;border:1px solid var(--border);background:var(--surface);border-radius:99px;
+font-size:12.5px;color:var(--text-2);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.result-count{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.result-count b{color:var(--accent);font-variant-numeric:tabular-nums}
+
+.doc-wrap{max-width:960px;margin:0 auto;padding:34px 28px 90px;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:36px}
+.article{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+padding:34px 38px;box-shadow:var(--shadow)}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--accent)}
+.article h1{font-size:26px;margin:0 0 8px;letter-spacing:-.4px}
+.article .meta{font-size:12px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.article h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-2)}
+.article h3{font-size:16px;margin:26px 0 10px}
+.article h4{font-size:14px;margin:20px 0 8px}
+.article p,.article li{color:var(--text-2);font-size:14px;line-height:1.85}
+.article ul,.article ol{padding-left:22px}
+.article li{margin:4px 0}
+.article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-color:#c9daff}
+.article blockquote{margin:14px 0;padding:10px 16px;background:var(--accent-soft);border-left:3px solid var(--accent);
+border-radius:0 8px 8px 0;color:var(--text-2)}
+.article pre{background:#0f172a;color:#e2e8f0;padding:16px 18px;border-radius:10px;overflow-x:auto;
+font-size:12.5px;line-height:1.7}
+.article pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+.article img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;margin:14px auto}
+.article figure{margin:16px 0;text-align:center}
+.article hr{border:0;border-top:1px solid var(--border);margin:26px 0}
+.table-wrap{overflow-x:auto;margin:14px 0}
+.article table{border-collapse:collapse;width:100%;font-size:13px}
+.article th,.article td{border:1px solid var(--border);padding:8px 11px;text-align:left}
+.article th{background:var(--surface-2);font-weight:650}
+.toc{position:sticky;top:calc(var(--header) + 80px);align-self:start;font-size:12.5px}
+.toc b{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.toc a{display:block;padding:4px 0 4px 10px;border-left:2px solid var(--border);color:var(--text-2);
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.toc a.lv3{padding-left:22px;font-size:12px;color:var(--muted)}
+.doc-nav{display:flex;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--border)}
+.doc-nav a{flex:1;padding:11px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+font-size:12.5px;color:var(--text-2)}
+.doc-nav a:hover{border-color:var(--accent);color:var(--accent)}
+.doc-nav small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+@media(max-width:900px){.doc-wrap{grid-template-columns:1fr;padding:20px 14px 60px}.toc{display:none}.article{padding:22px 18px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+<div class="brand"><div class="logo">M</div><div><div class="brand-t">Mac 清单</div><div class="brand-s">Mac 软件清单 &amp; 使用技巧</div></div></div>
+<div class="topbar-sp"></div>
+<button class="icon-btn" id="theme" title="切换深浅色" aria-label="切换主题"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+<a class="gh-btn" href="../index.html">← 返回清单</a>
+</div></header>
+<div class="doc-wrap">
+<article class="article">
+<div class="crumb"><a href="../index.html">首页</a> / 软件专题 / 使用GitBook本地制作电子书</div>
+<h1>使用GitBook本地制作电子书</h1><div class="meta">内容源自 qianguyihao/Mac-list · 02-其他软件/使用GitBook本地制作电子书.md</div>
+<div class="md-body"><h2 id="sec-0">前言</h2>
+<p>对于经常阅读的人来说，制作本地电子书，算是刚需了。</p>
+<p>网上的很多步骤不太完整，所以我特地整理出一个详细的教程。亲测有效，一劳永逸。</p>
+<p>大致的思路是：</p>
+<ul><li>本地安装 gitbook</li></ul>
+<ul><li>安装 calibre，配置ebook-convert</li></ul>
+<ul><li>导出epub电子书（或者mobi、pdf），完善目录结构</li></ul>
+<h2 id="sec-1">使用步骤</h2>
+<h3 id="sec-2">步骤1：通过 npm 安装 gitbook-cli</h3>
+<p>安装命令如下：</p>
+<pre><code>npm install -g gitbook-cli</code></pre>
+<p>PS：如果你不知道 <code>npm</code> 是什么，可以自行查阅<strong>如何安装 npm 环境</strong>。</p>
+<h3 id="sec-3">步骤2：安装ebook-convert</h3>
+<p>（1）Mac 系统需要先安装 <a href="https://calibre-ebook.com/download" target="_blank" rel="noopener noreferrer">calibre</a> 软件。安装完成后，执行如下命令：</p>
+<pre><code>sudo ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert /usr/bin</code></pre>
+<p>如果出现<code>Operation not permitted</code>异常，说明系统权限限制，此时需要<strong>配置环境变量</strong>。</p>
+<p>（2）环境变量配置：</p>
+<pre><code class="language-bash">vim ~/.bash_profile
+
+export EBOOK_PATH=/Applications/calibre.app/Contents/MacOS
+export PATH=$PATH:$EBOOK_PATH</code></pre>
+<p>然后刷新一下刚刚的配置：</p>
+<pre><code>source ~/.bash_profile</code></pre>
+<p>验证<code>ebook-convert</code>指令是否能正常被调用：</p>
+<pre><code>ebook-convert --version</code></pre>
+<h3 id="sec-4">步骤3：导出电子书</h3>
+<p>本地新建一个空的文件夹，作为项目。</p>
+<p>（1）在当前项目下，执行如下命令，进行初始化：</p>
+<pre><code>gitbook init</code></pre>
+<p>此时，项目下会自动生成如下两个文件：（<strong>非常重要</strong>）</p>
+<ul><li><code>README.md</code>：书籍的介绍写在这个文件里。</li></ul>
+<ul><li><code>SUMMARY.md</code>：书籍的<strong>目录结构</strong>在这里配置。</li></ul>
+<p>（2）本地预览电子书：</p>
+<pre><code>gitbook serve</code></pre>
+<p>执行上方命令后，会对项目里的 Markdown 格式的文件进行转换，默认转换为 html 格式，最后提示 <code>Serving book on http://localhost:4000</code>。</p>
+<p>我们打开浏览器输入<code>http://localhost:4000</code>，预览一下电子书的效果吧。</p>
+<p>（3）生成 epub 格式的电子书：（epub是最常见、最通用的电子书格式）</p>
+<pre><code class="language-bash">gitbook epub ./ ./mybook.epub</code></pre>
+<p>生成 mobi 格式的电子书：</p>
+<pre><code>gitbook mobi ./ ./mybook.mobi</code></pre>
+<p>你还可以生成 PDF 格式的电子书：</p>
+<pre><code>gitbook pdf ./ ./mybook.pdf</code></pre>
+<h3 id="sec-5">步骤4：配置电子书的目录</h3>
+<p>我们先把本地的 markdown 文件（也就是我们的<strong>电子书素材</strong>）放到项目中，然后在<code>SUMMARY.md</code>文件中配置电子书的目录。举例如下：</p>
+<pre><code># 目录
+
+* [前言](README.md)
+
+* [主题介绍](Chapter1/README.md)
+
+* [如何购买](Chapter2/README.md)
+
+* [售后服务](Chapter3/README.md)
+
+* [常见问题](Chapter4/README.md)
+
+* [更新记录](Chapter5/README.md)
+
+	* [# 2018-12-02](Chapter5/20181202.md)
+	* [# 2018-12-04](Chapter5/20181204.md)
+	* [# 2018-12-05](Chapter5/20181205.md)
+	* [# 2018-12-06](Chapter5/20181206.md)
+	* [# 2018-12-07](Chapter5/20181207.md)
+	* [# 2018-12-10](Chapter5/20181210.md)
+	* [# 2018-12-11](Chapter5/2018121.md)
+	* [# 2018-12-12](Chapter5/20181212.md)
+	* [# 2018-12-13](Chapter5/20181213.md)
+  ------</code></pre>
+<p>制作成的目录效果如下：</p>
+<figure><img src="http://img.smyhvae.com/20190420_1517.png" alt="" loading="lazy"></figure>
+<h3 id="sec-6">配置封面</h3>
+<p>所有格式的电子书都可以配置自定义封面,在项目的根目录下提供 <code>cover.jpg</code> 和 <code>cover_small.jpg</code> 两种封面图片时，生成电子书会自动增加封面页.</p>
+<h3 id="sec-7">参考链接</h3>
+<ul><li>【荐】GitBook使用入门篇，让你快速生成文档(含<code>SUMMARY.md</code>目录举例）：&lt;http://www.hehaibao.com/learn-gitbook/&gt;</li></ul>
+<ul><li>【荐】ebook-convert配置环境变量：&lt;http://gitbook.wiliam.me/ebookandpdf.html&gt;</li></ul>
+<ul><li>gitbook 入门教程之导出电子书：&lt;https://juejin.im/post/5caa0fb46fb9a05e5a2e53b3&gt;</li></ul>
+<ul><li>gitbook 的介绍和使用：&lt;https://snowdreams1006.github.io/myGitbook/experience/gitbook-com.html&gt;</li></ul>
+<h2 id="sec-8">进阶篇</h2>
+<h3 id="sec-9">修改电子书的字体大小</h3>
+<p>我们还可以在项目的目录下，新建文件<code>book.json</code>，用于修改字体大小。</p></div>
+<div class="doc-nav"><a href="p08.html"><small>← 上一篇</small>Ulysses：理想中的写作软件</a><a href="p10.html" style="text-align:right"><small>下一篇 →</small>打造 Mac 下高颜值好用的终端环境</a></div>
+</article>
+<aside class="toc"><b>本页目录</b><a class="" href="#sec-0">前言</a><a class="" href="#sec-1">使用步骤</a><a class="lv3" href="#sec-2">步骤1：通过 npm 安装 gitbook-cli</a><a class="lv3" href="#sec-3">步骤2：安装ebook-convert</a><a class="lv3" href="#sec-4">步骤3：导出电子书</a><a class="lv3" href="#sec-5">步骤4：配置电子书的目录</a><a class="lv3" href="#sec-6">配置封面</a><a class="lv3" href="#sec-7">参考链接</a><a class="" href="#sec-8">进阶篇</a><a class="lv3" href="#sec-9">修改电子书的字体大小</a></aside>
+</div>
+<footer><div class="foot-in">内容源自 <a href="https://github.com/qianguyihao/Mac-list" target="_blank" rel="noopener noreferrer">qianguyihao/Mac-list</a>（作者：千古壹号），本站为非官方静态镜像。原仓库未声明开源许可证。</div></footer>
+<script>
+(function(){const d=document.documentElement,t=localStorage.getItem('ml-theme');
+if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))d.dataset.theme='dark';
+document.getElementById('theme').addEventListener('click',()=>{const x=d.dataset.theme==='dark';d.dataset.theme=x?'light':'dark';localStorage.setItem('ml-theme',x?'light':'dark');});})();
+</script>
+</body></html>

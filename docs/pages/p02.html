@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第一次使用MacBook时需要安装的软件 · Mac 清单</title>
+<meta name="theme-color" content="#f6f7f9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='38' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--surface-2:#fbfcfd;--border:#e4e7ec;--border-2:#eef0f3;
+--text:#1c2027;--text-2:#4b5563;--muted:#7a8492;--accent:#2563eb;--accent-soft:#eef4ff;
+--shadow:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.04);
+--radius:12px;--sidebar:246px;--header:64px}
+[data-theme="dark"]{--bg:#111418;--surface:#1a1f26;--surface-2:#1e242c;--border:#2b323c;--border-2:#252c35;
+--text:#e9edf2;--text-2:#b6bfcb;--muted:#8b95a3;--accent:#6ea8ff;--accent-soft:#1b2a44;
+--shadow:0 1px 2px rgba(0,0,0,.2),0 6px 18px rgba(0,0,0,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:132px}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+::selection{background:#cfe0ff;color:#102a58}
+
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 88%,transparent);
+backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1400px;margin:0 auto;height:var(--header);padding:0 28px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;
+font-size:17px;background:linear-gradient(140deg,#3b82f6,#1e40af);box-shadow:0 3px 10px rgba(37,99,235,.25)}
+.brand-t{font-size:16px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand-s{font-size:12px;color:var(--muted);white-space:nowrap}
+.topbar-sp{flex:1}
+.stat{font-size:12px;color:var(--muted);white-space:nowrap}
+.stat b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.icon-btn{width:34px;height:34px;border:1px solid var(--border);background:var(--surface);border-radius:9px;
+display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:.15s}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gh-btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid var(--border);
+border-radius:9px;background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-2);transition:.15s}
+.gh-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.menu-btn{display:none}
+.searchbar{position:sticky;top:var(--header);z-index:45;background:var(--bg);border-bottom:1px solid var(--border)}
+.searchbar-in{max-width:1400px;margin:0 auto;padding:12px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:460px}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#q{width:100%;height:38px;padding:0 62px 0 36px;border:1px solid var(--border);border-radius:10px;
+background:var(--surface);color:var(--text);outline:none;transition:.15s}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);
+border:1px solid var(--border);border-radius:5px;padding:1px 6px;background:var(--surface-2)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{height:30px;padding:0 12px;border:1px solid var(--border);background:var(--surface);border-radius:99px;
+font-size:12.5px;color:var(--text-2);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.result-count{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.result-count b{color:var(--accent);font-variant-numeric:tabular-nums}
+
+.doc-wrap{max-width:960px;margin:0 auto;padding:34px 28px 90px;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:36px}
+.article{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+padding:34px 38px;box-shadow:var(--shadow)}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--accent)}
+.article h1{font-size:26px;margin:0 0 8px;letter-spacing:-.4px}
+.article .meta{font-size:12px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.article h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-2)}
+.article h3{font-size:16px;margin:26px 0 10px}
+.article h4{font-size:14px;margin:20px 0 8px}
+.article p,.article li{color:var(--text-2);font-size:14px;line-height:1.85}
+.article ul,.article ol{padding-left:22px}
+.article li{margin:4px 0}
+.article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-color:#c9daff}
+.article blockquote{margin:14px 0;padding:10px 16px;background:var(--accent-soft);border-left:3px solid var(--accent);
+border-radius:0 8px 8px 0;color:var(--text-2)}
+.article pre{background:#0f172a;color:#e2e8f0;padding:16px 18px;border-radius:10px;overflow-x:auto;
+font-size:12.5px;line-height:1.7}
+.article pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+.article img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;margin:14px auto}
+.article figure{margin:16px 0;text-align:center}
+.article hr{border:0;border-top:1px solid var(--border);margin:26px 0}
+.table-wrap{overflow-x:auto;margin:14px 0}
+.article table{border-collapse:collapse;width:100%;font-size:13px}
+.article th,.article td{border:1px solid var(--border);padding:8px 11px;text-align:left}
+.article th{background:var(--surface-2);font-weight:650}
+.toc{position:sticky;top:calc(var(--header) + 80px);align-self:start;font-size:12.5px}
+.toc b{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.toc a{display:block;padding:4px 0 4px 10px;border-left:2px solid var(--border);color:var(--text-2);
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.toc a.lv3{padding-left:22px;font-size:12px;color:var(--muted)}
+.doc-nav{display:flex;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--border)}
+.doc-nav a{flex:1;padding:11px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+font-size:12.5px;color:var(--text-2)}
+.doc-nav a:hover{border-color:var(--accent);color:var(--accent)}
+.doc-nav small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+@media(max-width:900px){.doc-wrap{grid-template-columns:1fr;padding:20px 14px 60px}.toc{display:none}.article{padding:22px 18px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+<div class="brand"><div class="logo">M</div><div><div class="brand-t">Mac 清单</div><div class="brand-s">Mac 软件清单 &amp; 使用技巧</div></div></div>
+<div class="topbar-sp"></div>
+<button class="icon-btn" id="theme" title="切换深浅色" aria-label="切换主题"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+<a class="gh-btn" href="../index.html">← 返回清单</a>
+</div></header>
+<div class="doc-wrap">
+<article class="article">
+<div class="crumb"><a href="../index.html">首页</a> / 新手指南 / 第一次使用MacBook时需要安装的软件</div>
+<h1>第一次使用MacBook时需要安装的软件</h1><div class="meta">内容源自 qianguyihao/Mac-list · 01-新手指南/02-第一次使用MacBook时需要安装的软件.md</div>
+<div class="md-body"><h2 id="sec-0">前言</h2>
+<blockquote>第一天拿到MacBook时，我会立即安装这些软件，确保接下来的Mac使用的操作比较顺利。</blockquote>
+<p>涉及付费软件时，文中凡是标注了价格的，代表我是付费购买的。</p>
+<h2 id="sec-1">前置软件</h2>
+<h3 id="sec-2">截图软件：<a href="https://zh.snipaste.com/" target="_blank" rel="noopener noreferrer">Snipaste</a></h3>
+<p>用于把电脑的序列号、配置信息、存储空间、等信息，截图存档。</p>
+<h3 id="sec-3">磁盘分析：腾讯柠檬</h3>
+<p>用腾讯柠檬的深度清理，分析磁盘的文件占比。后续等电脑使用一两年之后，在对比一下磁盘空间。就知道哪些文件夹被挤得很满了。</p>
+<h3 id="sec-4">科学上网</h3>
+<p>科学上网包括两步：代理工具+服务，缺一不可。（1）先安装代理工具；（2）然后购买服务。</p>
+<p>1、下载代理工具 ClashX：</p>
+<ul><li>下载地址（第三方）：https://github.com/bannedbook/ClashX/releases</li></ul>
+<p>ClashX的官方项目已下架，可以在第三方网站下载安装包。</p>
+<ul><li>参考教程：https://github.com/githubvpn007/ClashX</li></ul>
+<p>2、上网服务：AgentNEO：</p>
+<ul><li>购买网址：<a href="https://niceneo.com/?rc=ut50176c" target="_blank" rel="noopener noreferrer">AgentNEO</a></li></ul>
+<p>把上网服务搭建之后，就可以下载  chrome、dropbox等后续软件了。</p>
+<h2 id="sec-5">必备软件</h2>
+<h3 id="sec-6">浏览器：<a href="https://www.google.com/intl/zh-CN/chrome/" target="_blank" rel="noopener noreferrer">chrome 浏览器</a></h3>
+<p>打开互联网世界大门的入口。登录google账号之后，同步书签和浏览器插件。</p>
+<h3 id="sec-7">输入法：<a href="https://shurufa.sogou.com/mac" target="_blank" rel="noopener noreferrer">搜狗输入法</a></h3>
+<p>用了十几年的搜狗输入法，写了400W字，积累了23W 个词条。</p>
+<h3 id="sec-8">滚动截图软件+简单的录屏软件：iShot Pro</h3>
+<ul><li>下载地址：App Sore</li><li>价格：￥78 买断制，一次购买，永久持续更新升级。</li></ul>
+<figure><img src="https://img.smyhvae.com/202601020019850.png" alt="image-20260102001935831" loading="lazy"></figure>
+<p>把截图功能的快捷键从默认的「Ctrl + A」改成「F2」：</p>
+<figure><img src="https://img.smyhvae.com/202601020024759.png" alt="image-20260102002406730" loading="lazy"></figure>
+<p>因为 Snipaste的快捷键是 F1截图、F3贴图，再加上 iShot Pro的快捷键是F2贴图，这样的话，这两个软件的截图快捷键就都在一排、挨在一起了，方便记忆和连贯操作。</p>
+<p>同时，在通用设置中，设置为开机自启动。</p>
+<h3 id="sec-9">启动器：<a href="https://www.raycast.com/" target="_blank" rel="noopener noreferrer">Raycast</a></h3>
+<p>代替系统自带的 Spotlight。</p>
+<p>通过 Raycast 可以快速启动任意软件，搜索本地的任意文件，甚至还可以作为计算器使用。它的历史剪贴板功能，尤为好用，用过就离不开了。</p>
+<p>1、先把 Spotlight 的「cmd + 空格」快捷键取消，把这个快捷键让给 Raycast。</p>
+<p>将 Spotlight 取消快捷键的操作路径如下：</p>
+<p>在系统设置中搜索「聚焦」：</p>
+<figure><img src="https://img.smyhvae.com/202601012347657.png" alt="image-20260101234701634" loading="lazy"></figure>
+<p>然后进入「键盘快捷键」：</p>
+<figure><img src="https://img.smyhvae.com/202601012349841.png" alt="image-20260101234923819" loading="lazy"></figure>
+<p>上图中，把这两个都取消打钩。</p>
+<p>2、给 Raycast 设置键盘快捷键：</p>
+<p>打开 Raycast 的设置面板，将默认的「option + 空格」快捷键改成「cmd + 空格」快捷键。</p>
+<figure><img src="https://img.smyhvae.com/202601020008849.png" alt="image-20260102000842828" loading="lazy"></figure>
+<p>3、Raycast的历史剪贴板功能，默认没有快捷键，我们给它一个快捷键「option + cmd + C」，然后将保存历史从默认的7天改为一年（越长越好）：</p>
+<figure><img src="https://img.smyhvae.com/202601020029918.png" alt="image-20260102002942898" loading="lazy"></figure>
+<p>Raycast的历史剪贴板功能的使用效果：</p>
+<figure><img src="https://img.smyhvae.com/202601020034704.png" alt="image-20260102003406683" loading="lazy"></figure>
+<p>4、通过 Raycast 快捷启动电脑上的任意软件：</p>
+<p>比如，我想通过 按下「Option + C」快捷键，就能打开 Chrome浏览器的话，可以在 Raycast 上这样配置：</p>
+<figure><img src="https://img.smyhvae.com/202601021124208.png" alt="image-20260102112454186" loading="lazy"></figure>
+<p>我高频使用的几个重要软件（稍后会陆续安装），建立的快捷键映射如下：</p>
+<ul><li>chrome浏览器：option + C （C是 chrome的缩写）</li><li>Typora：option + M（M是 markdown的缩写）</li><li>微信：option + W</li><li>vs code / cursor 编程软件：option + V</li></ul>
+<h3 id="sec-10">密码管理软件：1paasword</h3>
+<ul><li>下载地址：https://1password.com/downloads/mac</li><li>费用：￥253/年</li></ul>
+<p>最新版的安装包注意要在官网下载，不要在 App Store下载。App Store上的安装包已经两年没更新了。</p>
+<h3 id="sec-11">同步网盘：dropbox</h3>
+<p>在别的电脑上写的内容，自动同步到新电脑。在新电脑上继续写。</p>
+<h3 id="sec-12">写作： <a href="https://typoraio.cn/" target="_blank" rel="noopener noreferrer">Typora</a>、图床上传工具：<a href="https://picgo.github.io/PicGo-Doc/zh/guide/" target="_blank" rel="noopener noreferrer">PicGo</a></h3>
+<p>Typora是很值得入手的付费软件。把 PicGo 作为Typora写作时的默认图片上传工具，很方便。</p>
+<p>1、PicGo 配置：</p>
+<figure><img src="https://img.smyhvae.com/202512300136285.png" alt="" loading="lazy"></figure>
+<p>利用 PicGo 上传图片时，如果图片的后缀出现 <code>.pngundefined</code>这种多语的 undefined格式的话，解决办法是：先把<code>设定网址后缀</code>设置有值后再清空，就会正常。参考链接：<a href="https://github.com/Molunerfinn/PicGo/issues/1156" target="_blank" rel="noopener noreferrer">图片的后缀名不对的bug</a></p>
+<p>2、在 Typora中把 PicGo作为上传图片的默认图床工具：</p>
+<figure><img src="https://img.smyhvae.com/202512300140120.png" alt="" loading="lazy"></figure>
+<h3 id="sec-13">版本控制：Git、GUI 工具：Tower</h3>
+<p>1、把markdown文章写在 GitHub 私有仓库中，用 Git 作为版本管理工具。</p>
+<p>在 Mac 上安装 Git 有多种方式。 最简单的方法是直接安装 <a href="https://developer.apple.com/download/all/?q=command" target="_blank" rel="noopener noreferrer">Command Line Tools for Xcode</a> 即可，安装完成后 Git 就有了。</p>
+<p>还有一个方法：Mavericks （10.9） 或更高版本的系统中，在 Terminal 里尝试首次运行 &#x27;git&#x27; 命令即可，会提示你安装命令行开发者工具：</p>
+<pre><code class="language-console">$ git --version</code></pre>
+<p>2、另外再安装一个GUI软件做可视化管理。Git 官网推荐了<a href="https://git-scm.com/download/gui/mac" target="_blank" rel="noopener noreferrer">数十种GUI客户端</a> 可以参考一下。我个人最喜欢用的 GUI客户端是 Tower。</p>
+<p>打开tower之后，会弹出一个弹窗，需要配置用户名和邮箱：</p>
+<figure><img src="https://img.smyhvae.com/202601011436846.png" alt="image-20260101143638827" loading="lazy"></figure>
+<p>下面这张图用于配置与github的连接：</p>
+<figure><img src="https://img.smyhvae.com/202601011436944.png" alt="image-20260101143653924" loading="lazy"></figure>
+<p>token的配置参考：https://blog.csdn.net/weixin_41010198/article/details/119698015</p>
+<h3 id="sec-14">写日记：day one</h3>
+<ul><li>下载地址：App Store</li></ul>
+<h3 id="sec-15">聊天软件：微信、QQ</h3>
+<ul><li>下载地址：App Store</li></ul>
+<h3 id="sec-16">NAS：极空间</h3>
+<ul><li>下载地址：https://download.zspace.cn/</li></ul>
+<p>我买了「极空间」的NAS设备，搭配它的软件，可以很方便地进行文件备份和管理。</p>
+<h3 id="sec-17">护眼工具：f.lux</h3>
+<ul><li>下载地址：https://justgetflux.com/</li></ul>
+<p>降低屏幕的色温，减弱蓝光，保护眼睛。</p>
+<p>打开软件后，会自动识别当前定位，确定 location的坐标。我的使用习惯是 Daytime（日出） 色温设置为 5700， Sunset（日落）色温设置为4300：</p>
+<figure><img src="https://img.smyhvae.com/202601051422360.png" alt="image-20260105142231338" loading="lazy"></figure>
+<h3 id="sec-18">菜单栏管理：Hidden Bar</h3>
+<ul><li>下载地址：App Store</li></ul>
+<p>用最精简的功能，实现了在菜单栏隐藏应用图标这个小需求。</p>
+<p>按住 cmd键盘拖拽顶部的软件图标，即可把菜单栏中不想展示的图标隐藏起来。</p>
+<h3 id="sec-19">日历工具：Itsycal</h3>
+<ul><li>下载地址：https://www.mowglii.com/itsycal/</li></ul>
+<p>安装完成后，打开设置面板，调整一些参数配置。</p>
+<ul><li>允许该软件读取系统自带的日历；显示事件列表中设置为31天（默认是7天），勾选“生日”和“节假日”。</li><li>勾选“登录时启动”（默认未勾选）</li><li>星期开始于“星期一”（默认是星期天）</li><li>隐藏图标，并将日期格式设置为 <code>yyyy/MM/dd HH:mm E</code></li></ul>
+<figure><img src="https://img.smyhvae.com/202601052049350.png" alt="image-20260105204913327" loading="lazy"></figure>
+<p>最后，将菜单栏中系统自带的日期显示，隐藏掉。操作路径：系统设置--&gt;菜单栏--&gt;时钟--&gt;时钟选项。配置项：</p>
+<ul><li>显示日期：设置为“永不”</li><li>取消勾选“显示星期”</li><li>时间样式从“数码”改为“指针”。</li></ul>
+<figure><img src="https://img.smyhvae.com/202601052055757.png" alt="image-20260105205513733" loading="lazy"></figure>
+<p>菜单栏最终实现效果：</p>
+<figure><img src="https://img.smyhvae.com/202601052101267.png" alt="image-20260105210110243" loading="lazy"></figure>
+<p>上图中，点击菜单栏的Itsycal软件图标，会弹出日历面板，非常方便。</p>
+<h2 id="sec-20">按需安装</h2>
+<h3 id="sec-21">截图软件：iShot Pro</h3>
+<h3 id="sec-22">网盘：百度网盘</h3>
+<p>百度的大多数软件我都很鄙视，百度搜索引擎我基本不用。但是百度网盘还是很坚挺的。用它来存储一些临时文件或者网上的学习资料还是挺方便的。</p>
+<p>就拿现在的摄影机构来说，大部分机构依然是用百度网盘给客户发照片资源。</p>
+<h2 id="sec-23">进阶软件</h2></div>
+<div class="doc-nav"><a href="p01.html"><small>← 上一篇</small>第一次使用MacBook时需要做的配置</a><a href="p03.html" style="text-align:right"><small>下一篇 →</small>Alfred</a></div>
+</article>
+<aside class="toc"><b>本页目录</b><a class="" href="#sec-0">前言</a><a class="" href="#sec-1">前置软件</a><a class="lv3" href="#sec-2">截图软件：Snipaste</a><a class="lv3" href="#sec-3">磁盘分析：腾讯柠檬</a><a class="lv3" href="#sec-4">科学上网</a><a class="" href="#sec-5">必备软件</a><a class="lv3" href="#sec-6">浏览器：chrome 浏览器</a><a class="lv3" href="#sec-7">输入法：搜狗输入法</a><a class="lv3" href="#sec-8">滚动截图软件+简单的录屏软件：iShot Pro</a><a class="lv3" href="#sec-9">启动器：Raycast</a><a class="lv3" href="#sec-10">密码管理软件：1paasword</a><a class="lv3" href="#sec-11">同步网盘：dropbox</a><a class="lv3" href="#sec-12">写作： Typora、图床上传工具：PicGo</a><a class="lv3" href="#sec-13">版本控制：Git、GUI 工具：Tower</a><a class="lv3" href="#sec-14">写日记：day one</a><a class="lv3" href="#sec-15">聊天软件：微信、QQ</a><a class="lv3" href="#sec-16">NAS：极空间</a><a class="lv3" href="#sec-17">护眼工具：f.lux</a><a class="lv3" href="#sec-18">菜单栏管理：Hidden Bar</a><a class="lv3" href="#sec-19">日历工具：Itsycal</a><a class="" href="#sec-20">按需安装</a><a class="lv3" href="#sec-21">截图软件：iShot Pro</a><a class="lv3" href="#sec-22">网盘：百度网盘</a><a class="" href="#sec-23">进阶软件</a></aside>
+</div>
+<footer><div class="foot-in">内容源自 <a href="https://github.com/qianguyihao/Mac-list" target="_blank" rel="noopener noreferrer">qianguyihao/Mac-list</a>（作者：千古壹号），本站为非官方静态镜像。原仓库未声明开源许可证。</div></footer>
+<script>
+(function(){const d=document.documentElement,t=localStorage.getItem('ml-theme');
+if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))d.dataset.theme='dark';
+document.getElementById('theme').addEventListener('click',()=>{const x=d.dataset.theme==='dark';d.dataset.theme=x?'light':'dark';localStorage.setItem('ml-theme',x?'light':'dark');});})();
+</script>
+</body></html>

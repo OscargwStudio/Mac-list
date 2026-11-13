@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mac基本操作 · Mac 清单</title>
+<meta name="theme-color" content="#f6f7f9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='38' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--surface-2:#fbfcfd;--border:#e4e7ec;--border-2:#eef0f3;
+--text:#1c2027;--text-2:#4b5563;--muted:#7a8492;--accent:#2563eb;--accent-soft:#eef4ff;
+--shadow:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.04);
+--radius:12px;--sidebar:246px;--header:64px}
+[data-theme="dark"]{--bg:#111418;--surface:#1a1f26;--surface-2:#1e242c;--border:#2b323c;--border-2:#252c35;
+--text:#e9edf2;--text-2:#b6bfcb;--muted:#8b95a3;--accent:#6ea8ff;--accent-soft:#1b2a44;
+--shadow:0 1px 2px rgba(0,0,0,.2),0 6px 18px rgba(0,0,0,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:132px}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+::selection{background:#cfe0ff;color:#102a58}
+
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 88%,transparent);
+backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1400px;margin:0 auto;height:var(--header);padding:0 28px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;
+font-size:17px;background:linear-gradient(140deg,#3b82f6,#1e40af);box-shadow:0 3px 10px rgba(37,99,235,.25)}
+.brand-t{font-size:16px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand-s{font-size:12px;color:var(--muted);white-space:nowrap}
+.topbar-sp{flex:1}
+.stat{font-size:12px;color:var(--muted);white-space:nowrap}
+.stat b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.icon-btn{width:34px;height:34px;border:1px solid var(--border);background:var(--surface);border-radius:9px;
+display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:.15s}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gh-btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid var(--border);
+border-radius:9px;background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-2);transition:.15s}
+.gh-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.menu-btn{display:none}
+.searchbar{position:sticky;top:var(--header);z-index:45;background:var(--bg);border-bottom:1px solid var(--border)}
+.searchbar-in{max-width:1400px;margin:0 auto;padding:12px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:460px}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#q{width:100%;height:38px;padding:0 62px 0 36px;border:1px solid var(--border);border-radius:10px;
+background:var(--surface);color:var(--text);outline:none;transition:.15s}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);
+border:1px solid var(--border);border-radius:5px;padding:1px 6px;background:var(--surface-2)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{height:30px;padding:0 12px;border:1px solid var(--border);background:var(--surface);border-radius:99px;
+font-size:12.5px;color:var(--text-2);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.result-count{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.result-count b{color:var(--accent);font-variant-numeric:tabular-nums}
+
+.doc-wrap{max-width:960px;margin:0 auto;padding:34px 28px 90px;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:36px}
+.article{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+padding:34px 38px;box-shadow:var(--shadow)}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--accent)}
+.article h1{font-size:26px;margin:0 0 8px;letter-spacing:-.4px}
+.article .meta{font-size:12px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.article h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-2)}
+.article h3{font-size:16px;margin:26px 0 10px}
+.article h4{font-size:14px;margin:20px 0 8px}
+.article p,.article li{color:var(--text-2);font-size:14px;line-height:1.85}
+.article ul,.article ol{padding-left:22px}
+.article li{margin:4px 0}
+.article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-color:#c9daff}
+.article blockquote{margin:14px 0;padding:10px 16px;background:var(--accent-soft);border-left:3px solid var(--accent);
+border-radius:0 8px 8px 0;color:var(--text-2)}
+.article pre{background:#0f172a;color:#e2e8f0;padding:16px 18px;border-radius:10px;overflow-x:auto;
+font-size:12.5px;line-height:1.7}
+.article pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+.article img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;margin:14px auto}
+.article figure{margin:16px 0;text-align:center}
+.article hr{border:0;border-top:1px solid var(--border);margin:26px 0}
+.table-wrap{overflow-x:auto;margin:14px 0}
+.article table{border-collapse:collapse;width:100%;font-size:13px}
+.article th,.article td{border:1px solid var(--border);padding:8px 11px;text-align:left}
+.article th{background:var(--surface-2);font-weight:650}
+.toc{position:sticky;top:calc(var(--header) + 80px);align-self:start;font-size:12.5px}
+.toc b{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.toc a{display:block;padding:4px 0 4px 10px;border-left:2px solid var(--border);color:var(--text-2);
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.toc a.lv3{padding-left:22px;font-size:12px;color:var(--muted)}
+.doc-nav{display:flex;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--border)}
+.doc-nav a{flex:1;padding:11px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+font-size:12.5px;color:var(--text-2)}
+.doc-nav a:hover{border-color:var(--accent);color:var(--accent)}
+.doc-nav small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+@media(max-width:900px){.doc-wrap{grid-template-columns:1fr;padding:20px 14px 60px}.toc{display:none}.article{padding:22px 18px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+<div class="brand"><div class="logo">M</div><div><div class="brand-t">Mac 清单</div><div class="brand-s">Mac 软件清单 &amp; 使用技巧</div></div></div>
+<div class="topbar-sp"></div>
+<button class="icon-btn" id="theme" title="切换深浅色" aria-label="切换主题"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+<a class="gh-btn" href="../index.html">← 返回清单</a>
+</div></header>
+<div class="doc-wrap">
+<article class="article">
+<div class="crumb"><a href="../index.html">首页</a> / 操作与技巧 / Mac基本操作</div>
+<h1>Mac基本操作</h1><div class="meta">内容源自 qianguyihao/Mac-list · 02-软件操作/02-Mac基本操作.md</div>
+<div class="md-body"><h1 id="sec-0">Mac基本操作</h1>
+<h3 id="sec-1">初次安装电脑时</h3>
+<ul><li>「触控板」，勾选“轻点来点按”。</li></ul>
+<ul><li>默认分辨率是<code>1728*1117</code>，可调整为 <code>1496*967</code>。</li></ul>
+<h2 id="sec-2">系统便好设置</h2>
+<h3 id="sec-3">更给功能键的默认行为：如何不按 Fn 就使用功能键？</h3>
+<p>默认情况下，如果想要按 F1~F12这些功能键，则需要同时按Fn键才行。这太麻烦了。如何不按 Fn 就使用功能键？</p>
+<p>如果你要更改顶行按键以使它们在无需按住 Fn 键的情况下用作标准功能键，请按照以下步骤操作：</p>
+<p>（1）选取苹果菜单  &gt;“系统偏好设置”。 （2）点按“键盘”。 （3）勾选“将 F1、F2 等键用作标准功能键”。</p>
+<p>参考链接：<a href="https://support.apple.com/zh-cn/HT204436" target="_blank" rel="noopener noreferrer">如何使用 Mac 上的功能键 - Apple 支持</a></p>
+<h3 id="sec-4">语音播报</h3>
+<p>打开「系统便好设置--&gt;辅助功能--&gt;语音」，即可设置不同国家的语言。</p>
+<p>img20161127_1621.png</p>
+<p>勾选上图中的红框部分，可以设置全局快捷键。这样的话，在任何一个软件当中，按下「 option+esc」时，就会朗读选中的文本。</p>
+<h3 id="sec-5">调整字体大小</h3>
+<p>Mac调整字体大小：「系统偏好设置 -&gt; 显示器 -&gt; 缩放」。如下图：</p>
+<p>20161219_0840.png</p>
+<h3 id="sec-6">如何分别设置Mac的鼠标和触控板的滚动方向</h3>
+<p>很多人习惯鼠标使用相反的滚动方向，而触控板类似iPad那样的自然滚动，问如何设置，当时我的回答是不知道，因为目前OS X的系统设置里，鼠标和触控板的设置是统一 的。今天发现了一个免费的软件Scroll Reverser，可以实现鼠标和触控板的分别设置。下载地址：&lt;https://pilotmoon.com/scrollreverser/&gt; 启动后程序显示在顶部菜单栏，设置简单明了，有需要的用户体验一下吧。</p>
+<h3 id="sec-7">Touch Bar 自定义</h3>
+<p>打开「系统偏好设置-键盘」，下面有个自定义控制条。</p>
+<h3 id="sec-8">色温调节：夜间模式</h3>
+<p>iOS9.3的最明显变化，莫过于苹果在发布会上特意提到的Night Shift夜间护眼模式。</p>
+<h3 id="sec-9">iCloud邮箱</h3>
+<p>如果您用于设置 iCloud 的 Apple ID 不以“@icloud.com”、“@me.com”或“@mac.com”结尾，您必须先设置一个“@icloud.com”电子邮件地址，然后才能使用 iCloud“邮件”。</p>
+<p>如果您拥有以“@mac.com”或“@me.com”结尾的电子邮件地址，则您已经拥有了名称相同但以“@icloud.com”结尾的等效地址。如果您使用的电子邮件别名以“@mac.com”或“@me.com”结尾，您也将拥有以“@icloud.com”结尾的等效地址。</p>
+<p><strong>操作如下：</strong></p>
+<ul><li>在 iOS 设备上，前往“设置”&gt;“iCloud”，开启“邮件”，然后按照屏幕上的说明操作。</li></ul>
+<ul><li>在 Mac 上，选取 Apple 菜单 &gt;“系统偏好设置”，点按“iCloud”，再选择“邮件”，然后按照屏幕上的说明操作。</li></ul>
+<p>PS：创建iCloud电子邮件地址后，您无法对其进行更改。</p>
+<p>设置 @icloud.com 电子邮件地址后即可用其登录 iCloud。您也可以用创建 iCloud 帐户时所用的 Apple ID 登录。</p>
+<p>您可以从以下任意地址发送 iCloud 电子邮件：</p>
+<p>您的 iCloud 电子邮件地址（您的帐号名称@icloud.com）</p>
+<p>别名</p>
+<p>参考链接：</p>
+<p><strong>直接注册以@icloud.com结尾的Apple ID：</strong></p>
+<p>参考链接：</p>
+<h2 id="sec-10">PodCast</h2>
+<p>PodCast中文翻译为播客，是一种特殊的音频or视频节目。PodCast这个单词是由iPod+Broadcast这两个单词组成的。</p>
+<p>PodCast可以在iTunes中收听。</p>
+<h3 id="sec-11">将要</h3>
+<h2 id="sec-12">软件安装</h2>
+<p>dmg格式：双击安装包，然后拖到applications文件夹下即可。</p>
+<h2 id="sec-13">编辑操作</h2>
+<h2 id="sec-14">输入法</h2>
+<h3 id="sec-15">拆字</h3>
+<p>有时候遇上笔画巨多的生僻字，用笔画写半天还得翻好几页，怎么破？mac pinyin提供了“拆字”功能，比如“鱻”，输入“yu yu”然后按 「shift+空格」即可。</p>
+<h2 id="sec-16">Safari浏览器使用</h2>
+<h4 id="sec-17">更改默认搜索引擎</h4>
+<p>选择「偏好设置--\&gt;搜索--\&gt;搜索引擎--\&gt;Google」。</p>
+<h4 id="sec-18">导入chrome浏览器的书签</h4>
+<p>选择「文件--&gt;导入自--&gt; Google Chrome」，然后选择要导入的项目。</p>
+<h4 id="sec-19">快捷键</h4>
+<p>Command + R 刷新</p>
+<h4 id="sec-20">上方显示书签栏／收藏栏</h4>
+<p>选择「显示--&gt; 显示个人收藏栏」。</p>
+<h4 id="sec-21">关闭软件的右上角通知</h4>
+<p>在Mac系统中有对通知的设置，打开系统偏好设置 — 通知 找到QQ，然后将QQ提示样式设置成无即可。</p>
+<h4 id="sec-22">复制文件/文件夹路径</h4>
+<ul><li>OS X 10.11系统，选中文件夹，「cmd +Option +c」 复制文件夹路径，cmd+v 粘贴。</li></ul>
+<p>之前的系统，利用Administrator创建一个到右键菜单，然后到设置里面设置快捷键。具体操作请百度。</p>
+<h4 id="sec-23">打开来自身份不明的开发者的应用程序</h4>
+<p>在应用程序文件夹，按住control键的同时打开应用程序。</p>
+<h4 id="sec-24">复制文件路径</h4>
+<ul><li>选择文件／文件夹按 Command+C 复制，在终端中 Command+V 粘贴即可。</li></ul>
+<ul><li>如果只是想在Finder中看到文件的路径, 并方便切换层级, Finder内置了「显示路径栏」的功能, 并配置了快捷键(Option+Cmd+P). 如下图所示：</li></ul>
+<p>20161124-184148.png</p>
+<p>参考链接：</p>
+<ul><li>[https://www.zhihu.com/question/22883229]</li></ul>
+<h3 id="sec-25">隐藏和取消隐藏 Mac App Store 中的已购项目</h3>
+<h3 id="sec-26">Mac同时登陆两个QQ</h3>
+<p>在已经打开的QQ中，按住「command + N」即可。</p>
+<h2 id="sec-27">others</h2>
+<h3 id="sec-28">词典</h3>
+<p>系统有一个自带应用「词典」，可以进行单词的查询。</p>
+<p>参考链接：</p>
+<ul><li>[Max OS-[xxx.app已损坏,打不开.你应该将它移到废纸篓]](http://www.jianshu.com/p/379b49b88df9)</li></ul>
+<ul><li><a href="http://www.yunrui.co/25693.html" target="_blank" rel="noopener noreferrer">如何解决MAC软件（dmg，akp，app）出现程序已损坏的提示</a></li></ul>
+<p>备注：这个链接里的各种资源都很不错啊。</p>
+<h2 id="sec-29">终端</h2>
+<h3 id="sec-30">在Finder的当前目录打开终端</h3>
+<p>在Finder打开terminal终端这个功能其实是有的，但是系统默认没有打开。我们可以通过如下方法将其打开：</p>
+<p>进入系统偏好设置-&gt;键盘-&gt;快捷键-&gt;服务。</p>
+<p>在右边新建位于文件夹位置的终端窗口上打勾。</p>
+<p>如此设置后，在Finder中右击某文件，在出现的菜单中找到服务，然后点击新建位于文件夹位置的终端窗口即可！</p></div>
+<div class="doc-nav"><a href="p12.html"><small>← 上一篇</small>MacTips-千古壹号</a><a href="p14.html" style="text-align:right"><small>下一篇 →</small>Mac软件操作</a></div>
+</article>
+<aside class="toc"><b>本页目录</b><a class="lv3" href="#sec-1">初次安装电脑时</a><a class="" href="#sec-2">系统便好设置</a><a class="lv3" href="#sec-3">更给功能键的默认行为：如何不按 Fn 就使用功能键？</a><a class="lv3" href="#sec-4">语音播报</a><a class="lv3" href="#sec-5">调整字体大小</a><a class="lv3" href="#sec-6">如何分别设置Mac的鼠标和触控板的滚动方向</a><a class="lv3" href="#sec-7">Touch Bar 自定义</a><a class="lv3" href="#sec-8">色温调节：夜间模式</a><a class="lv3" href="#sec-9">iCloud邮箱</a><a class="" href="#sec-10">PodCast</a><a class="lv3" href="#sec-11">将要</a><a class="" href="#sec-12">软件安装</a><a class="" href="#sec-13">编辑操作</a><a class="" href="#sec-14">输入法</a><a class="lv3" href="#sec-15">拆字</a><a class="" href="#sec-16">Safari浏览器使用</a><a class="lv3" href="#sec-25">隐藏和取消隐藏 Mac App Store 中的已购项目</a><a class="lv3" href="#sec-26">Mac同时登陆两个QQ</a><a class="" href="#sec-27">others</a><a class="lv3" href="#sec-28">词典</a><a class="" href="#sec-29">终端</a><a class="lv3" href="#sec-30">在Finder的当前目录打开终端</a></aside>
+</div>
+<footer><div class="foot-in">内容源自 <a href="https://github.com/qianguyihao/Mac-list" target="_blank" rel="noopener noreferrer">qianguyihao/Mac-list</a>（作者：千古壹号），本站为非官方静态镜像。原仓库未声明开源许可证。</div></footer>
+<script>
+(function(){const d=document.documentElement,t=localStorage.getItem('ml-theme');
+if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))d.dataset.theme='dark';
+document.getElementById('theme').addEventListener('click',()=>{const x=d.dataset.theme==='dark';d.dataset.theme=x?'light':'dark';localStorage.setItem('ml-theme',x?'light':'dark');});})();
+</script>
+</body></html>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MacTips-千古壹号 · Mac 清单</title>
+<meta name="theme-color" content="#f6f7f9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='38' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--surface-2:#fbfcfd;--border:#e4e7ec;--border-2:#eef0f3;
+--text:#1c2027;--text-2:#4b5563;--muted:#7a8492;--accent:#2563eb;--accent-soft:#eef4ff;
+--shadow:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.04);
+--radius:12px;--sidebar:246px;--header:64px}
+[data-theme="dark"]{--bg:#111418;--surface:#1a1f26;--surface-2:#1e242c;--border:#2b323c;--border-2:#252c35;
+--text:#e9edf2;--text-2:#b6bfcb;--muted:#8b95a3;--accent:#6ea8ff;--accent-soft:#1b2a44;
+--shadow:0 1px 2px rgba(0,0,0,.2),0 6px 18px rgba(0,0,0,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:132px}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+::selection{background:#cfe0ff;color:#102a58}
+
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 88%,transparent);
+backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1400px;margin:0 auto;height:var(--header);padding:0 28px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;
+font-size:17px;background:linear-gradient(140deg,#3b82f6,#1e40af);box-shadow:0 3px 10px rgba(37,99,235,.25)}
+.brand-t{font-size:16px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand-s{font-size:12px;color:var(--muted);white-space:nowrap}
+.topbar-sp{flex:1}
+.stat{font-size:12px;color:var(--muted);white-space:nowrap}
+.stat b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.icon-btn{width:34px;height:34px;border:1px solid var(--border);background:var(--surface);border-radius:9px;
+display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:.15s}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gh-btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid var(--border);
+border-radius:9px;background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-2);transition:.15s}
+.gh-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.menu-btn{display:none}
+.searchbar{position:sticky;top:var(--header);z-index:45;background:var(--bg);border-bottom:1px solid var(--border)}
+.searchbar-in{max-width:1400px;margin:0 auto;padding:12px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:460px}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#q{width:100%;height:38px;padding:0 62px 0 36px;border:1px solid var(--border);border-radius:10px;
+background:var(--surface);color:var(--text);outline:none;transition:.15s}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);
+border:1px solid var(--border);border-radius:5px;padding:1px 6px;background:var(--surface-2)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{height:30px;padding:0 12px;border:1px solid var(--border);background:var(--surface);border-radius:99px;
+font-size:12.5px;color:var(--text-2);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.result-count{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.result-count b{color:var(--accent);font-variant-numeric:tabular-nums}
+
+.doc-wrap{max-width:960px;margin:0 auto;padding:34px 28px 90px;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:36px}
+.article{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+padding:34px 38px;box-shadow:var(--shadow)}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--accent)}
+.article h1{font-size:26px;margin:0 0 8px;letter-spacing:-.4px}
+.article .meta{font-size:12px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.article h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-2)}
+.article h3{font-size:16px;margin:26px 0 10px}
+.article h4{font-size:14px;margin:20px 0 8px}
+.article p,.article li{color:var(--text-2);font-size:14px;line-height:1.85}
+.article ul,.article ol{padding-left:22px}
+.article li{margin:4px 0}
+.article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-color:#c9daff}
+.article blockquote{margin:14px 0;padding:10px 16px;background:var(--accent-soft);border-left:3px solid var(--accent);
+border-radius:0 8px 8px 0;color:var(--text-2)}
+.article pre{background:#0f172a;color:#e2e8f0;padding:16px 18px;border-radius:10px;overflow-x:auto;
+font-size:12.5px;line-height:1.7}
+.article pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+.article img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;margin:14px auto}
+.article figure{margin:16px 0;text-align:center}
+.article hr{border:0;border-top:1px solid var(--border);margin:26px 0}
+.table-wrap{overflow-x:auto;margin:14px 0}
+.article table{border-collapse:collapse;width:100%;font-size:13px}
+.article th,.article td{border:1px solid var(--border);padding:8px 11px;text-align:left}
+.article th{background:var(--surface-2);font-weight:650}
+.toc{position:sticky;top:calc(var(--header) + 80px);align-self:start;font-size:12.5px}
+.toc b{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.toc a{display:block;padding:4px 0 4px 10px;border-left:2px solid var(--border);color:var(--text-2);
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.toc a.lv3{padding-left:22px;font-size:12px;color:var(--muted)}
+.doc-nav{display:flex;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--border)}
+.doc-nav a{flex:1;padding:11px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+font-size:12.5px;color:var(--text-2)}
+.doc-nav a:hover{border-color:var(--accent);color:var(--accent)}
+.doc-nav small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+@media(max-width:900px){.doc-wrap{grid-template-columns:1fr;padding:20px 14px 60px}.toc{display:none}.article{padding:22px 18px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+<div class="brand"><div class="logo">M</div><div><div class="brand-t">Mac 清单</div><div class="brand-s">Mac 软件清单 &amp; 使用技巧</div></div></div>
+<div class="topbar-sp"></div>
+<button class="icon-btn" id="theme" title="切换深浅色" aria-label="切换主题"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+<a class="gh-btn" href="../index.html">← 返回清单</a>
+</div></header>
+<div class="doc-wrap">
+<article class="article">
+<div class="crumb"><a href="../index.html">首页</a> / 操作与技巧 / MacTips-千古壹号</div>
+<h1>MacTips-千古壹号</h1><div class="meta">内容源自 qianguyihao/Mac-list · 02-软件操作/01-MacTips-千古壹号.md</div>
+<div class="md-body"><blockquote>积累千古壹号平时遇到的 MacTips。第一次使用 Mac 时，很有用。</blockquote>
+<h3 id="sec-0">无法打开 xxx 软件，因为Apple无法检查其是否包含恶意软件</h3>
+<p>解决办法：打开设置中的“隐私与安全性--&gt;安全性设置”，点击“仍要打开”按钮，即可打开被阻止的 App。此按钮在你尝试打开该 App 后一小时内可用。</p>
+<p>参考链接：<a href="https://support.apple.com/zh-cn/guide/mac-help/mchleab3a043/mac" target="_blank" rel="noopener noreferrer">Apple 无法检查 App 是否包含恶意软件</a></p>
+<h3 id="sec-1">Mac M1 芯片的电脑，安装 Git</h3>
+<p>不需要安装 Xcode，这个太大了，好几个G。直接安装 <a href="https://developer.apple.com/download/all/?q=command" target="_blank" rel="noopener noreferrer">Command Line Tools for Xcode</a> 即可，安装完成后 Git 就有了。</p>
+<p>参考链接：</p>
+<ul><li><a href="https://blog.csdn.net/A_Brave/article/details/120844682" target="_blank" rel="noopener noreferrer">macos m1 安装git，终端运行git命令提示安装 Xcode</a></li></ul>
+<h3 id="sec-2">git clone 时，提示错误：Failed to connect to github.com port 443: Connection refused</h3>
+<p>解决办法：</p>
+<pre><code class="language-bash"># 这行命令可以不需要
+git config --global http.sslVerify &quot;false&quot;
+image.png
+# 重点是下面这两行命令，把端口号 7890 换成你自己的代理软件的端口号
+git config --global https.proxy http://127.0.0.1:7890
+git config --global http.proxy http://127.0.0.1:7890</code></pre>
+<p>参考链接：</p>
+<ul><li><a href="https://simplestark.com/archives/%E7%BB%8F%E9%AA%8C%E5%AE%9D%E5%AE%9Dfailedtoconnecttogithubcomport443operationtimedout" target="_blank" rel="noopener noreferrer">Failed to connect to github.com port 443: Operation timed out - 烟霞志</a></li></ul>
+<ul><li><a href="https://blog.csdn.net/Hodors/article/details/103226958" target="_blank" rel="noopener noreferrer">解决 Failed to connect to github.com port 443:connection timed out_fK0pS的博客-CSDN博客</a></li></ul>
+<h3 id="sec-3">Alfred的自动粘贴功能 Auto-Paste on return 失效，如何解决</h3>
+<p>解决办法：</p>
+<p>1、打开 Alfred Preferences 偏好设置，找到 Features — Clipboard History — Advanced，确保开启了Auto-Paste on return（回车时自动粘贴）功能。</p>
+<p>2、打开系统偏好设置 — 安全性与隐私 — 隐私 - 辅助功能，将 Alfred 勾选上。</p>
+<h3 id="sec-4">外接键盘的键位，映射修改</h3>
+<p>将 cmd 改为 option，将 option 改为 cmd。</p>
+<figure><img src="https://img.smyhvae.com/20220615_1905.png" alt="" loading="lazy"></figure>
+<h3 id="sec-5">Mac到底要不要关机</h3>
+<p>对于关机，我的观点是：</p>
+<ul><li>如果每天用，建议 Mac 不关机，使用睡眠模式；</li><li>如果不常用，建议 Mac 关机。</li></ul>
+<p>具体可以看这篇文章：<a href="http://www.ifanr.com/app/657745" target="_blank" rel="noopener noreferrer">Mac 到底要不要关机？| 领客专栏 · MacTips</a></p>
+<h3 id="sec-6">重置 SMC</h3>
+<p>如果发现 Macbook Pro 的某一个 Type-C 失效了，能充电，但是 HDMI 和 USB 网络都不行，此时可以重置 SMC。</p>
+<p>重置  SMC 是个 Mac 常用操作，电源、背光、亮屏、不能充电等等，都可以以此解决，不过很多人不知道。如何 重置 SMC 呢？</p>
+<p>1、将 Mac 关机。 2、在内建键盘上，按下键盘左侧的 Shift-Control-Option 键，然后同时按下电源按钮。按住这些按键和电源按钮 10 秒钟。 如果您的 MacBook Pro 带有 Touch ID，则 Touch ID 按钮也是电源按钮。 3、松开所有按键。 4、再次按下电源按钮以开启 Mac。</p>
+<h3 id="sec-7">卸载软件后，清除残留</h3>
+<p>虽然程序已经被删除了，但硬盘上可能会有残留文件。这些文件占内存小，如果你之后重新安装该应用程序的话，它们是会保留的。但如果以后再也不用的话，可以选择彻底删除。</p>
+<p>步骤如下：</p>
+<p>（1）打开资源库Library：按住⌥ Option键，单击“前往”菜单，菜单下就会出现“资源库”选项。 （2）删除缓存：在<code>Application Support</code>（应用程序支持）目录里，删除对应软件的文件夹。 （3）删除偏好设置：在<code>Preferences</code>（偏好设置）目录里，删掉对应软件的偏好设置文件。</p>
+<p>温馨提示：</p>
+<p>在终端输入命令<code>chflags nohidden ~/Library</code>，可以永久显示资源库Library文件夹。</p>
+<p>参考链接：</p>
+<ul><li><a href="https://zh.wikihow.com/%E5%9C%A8Mac%E4%B8%8A%E5%8D%B8%E8%BD%BD%E7%A8%8B%E5%BA%8F" target="_blank" rel="noopener noreferrer">wikiHow</a></li></ul>
+<h3 id="sec-8">Mac 备份微信聊天记录的问题（20180218）</h3>
+<p>问题描述：MAC版微信可以备份手机聊天记录到电脑了，但是手机和电脑明明是在同一个网络了，却说不在。手机显示的是网络名称，电脑的网络显示的是***的macbook。</p>
+<p>解决：把电脑里“设置-共享”里面的名称改为Wi-Fi的名称，就可以备份。</p>
+<p>PS：网上都是这个答案，但是我自己试了一下，还是不行。</p>
+<h3 id="sec-9">电脑锁屏（20180220）</h3>
+<p>问题描述：把电脑合上以后（或者按 Touch Bar上的锁定键后），再立即打开电脑，发现电脑并没有锁屏。原因是需要设置锁屏的时间。</p>
+<p>解决：「系统偏好设置 --&gt;安全与隐私 --&gt; 通用 --&gt; 进入睡眠或开始屏幕保护程序 --&gt; 选择“立即”」。</p>
+<h3 id="sec-10">修改host文件</h3>
+<p>点击 Finder，在顶部菜单栏选择“前往”－“前往文件夹”，粘入 <code>/private/etc/</code> 这个路径（不带引号），找到<code>hosts</code>文件。</p>
+<h3 id="sec-11">iPad上取消爱奇艺会员的续费</h3>
+<figure><img src="http://img.smyhvae.com/20180426_2338.png" alt="" loading="lazy"></figure>
+<h3 id="sec-12">Android手机连接Mac</h3>
+<h3 id="sec-13">mac下的局域网共享</h3>
+<p>参考链接：&lt;https://zhidao.baidu.com/question/368299591.html&gt;</p>
+<h3 id="sec-14">Mac日历设置生日提醒</h3>
+<p>1、iCloud 开启同步日历。</p>
+<p>2、通讯录里设置农历生日。</p>
+<p>3、日历里设置提醒时间（默认是提前一天）。</p>
+<p>20180725_1918.png</p>
+<h3 id="sec-15">Mac版微信备份时，提示“请将手机和电脑连接至同一网络后”</h3>
+<p>问题描述：我的Mac和手机，已经在同一网络下了，但在备份聊天记录时，依然提示“请将手机和电脑连接至同一网络后”。</p>
+<p>解决办法：</p>
+<p>把电脑里<strong>“设置-共享”</strong>里面的名称改为Wi-Fi的名称，就可以备份了。</p>
+<h3 id="sec-16">放大/缩小 Mac 微信的分辨率</h3>
+<p>快捷键：Cmd + +/-</p>
+<h3 id="sec-17">014 管理 iCloud 储存空间</h3>
+<ul><li>在 iPhone、iPad 或 iPod touch 上：如果您使用的是 iOS 10.3 或更高版本，请前往“设置”&gt;“[您的姓名]”&gt;“iCloud”。轻点“iCloud 储存空间”或“管理储存空间”。</li></ul>
+<ul><li>在 Mac 上，前往苹果菜单 「 --&gt; 系统偏好设置 --&gt; Apple ID（互联网账户）--&gt; iCloud」，然后点击「管理」。</li></ul>
+<ul><li>在 PC 上，请打开 Windows 版 iCloud。</li></ul>
+<ul><li>在支持的浏览器上，登录 iCloud.com。</li></ul>
+<p>参考链接：&lt;https://support.apple.com/zh-cn/HT204247&gt;</p>
+<h3 id="sec-18">Mac 版印象笔记，美化 Markdown 样式</h3>
+<p>参考链接：</p>
+<ul><li>&lt;https://github.com/timothyzhw/evernote-markdown-vue&gt;</li></ul>
+<ul><li>&lt;https://www.jianshu.com/p/1e7e0a975d30&gt;</li></ul>
+<p>操作步骤：</p>
+<p>（1）下载主题中的vue.css文件，以及包含字体的vue文件夹，拷贝到 目录<code>/Applications/印象笔记.app/Contents/Resources/common-markdown-mac/</code>下。</p>
+<p>（2）打开目录<code>/Applications/印象笔记.app/Contents/Resources/common-markdown-mac/</code>，编辑里面的 <code>index.html</code>文件，在最后一行<code>&lt;/html&gt;</code>前插入如下代码：</p>
+<pre><code>  &lt;link href=&quot;vue.css&quot; rel=&quot;stylesheet&quot;&gt;
+</code></pre>
+<p>（3）重启印象笔记。</p>
+<p>美化效果：</p>
+<figure><img src="http://img.smyhvae.com/20191210_1615.png" alt="" loading="lazy"></figure>
+<p><strong>【补充】个性化配置</strong></p>
+<p>（1）我们还可以增大段落之间的行距。在 vue.css 文件中，找到如下代码：</p>
+<pre><code class="language-css">.tui-editor-contents p {
+    line-height: 1.6rem;
+    word-spacing: .05rem;
+}
+</code></pre>
+<p>将上方代码修改为：</p>
+<pre><code class="language-css">.tui-editor-contents p {
+    line-height: 1.6rem;
+    word-spacing: .05rem;
+    margin-bottom: 1.2rem;
+}</code></pre>
+<p>其实就是加了一行 <code>margin-bottom: 1.2rem;</code> 就搞定了。</p>
+<p>（2）修改二级标题的字体大小和颜色：</p>
+<p>找到如下代码：</p>
+<pre><code class="language-css">.tui-editor-contents h2 {
+    font-size: 24px;
+    border-bottom: 1px solid #ddd;
+    color: #2c3e50
+}</code></pre>
+<p>修改为：</p>
+<pre><code class="language-css">.tui-editor-contents h2 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid #ddd;
+    color: #24292e
+}</code></pre>
+<p>另外，我们还可以修改三级标题的 font-size 为 1.25rem。</p>
+<h3 id="sec-19">让 Dock 只显示已打开的应用程序</h3>
+<blockquote>这个功能，我都用的少，因为不习惯。</blockquote>
+<p><strong>背景</strong>：</p>
+<p>默认情况下，Dock 栏不仅会显示已打开的应用程序，还会显示最近打开过的应用程序（无论打开与否）。</p>
+<p>这种「一个不漏」的显示方式，并不是太好：</p>
+<ul><li>对那些已经有不少在 Dock 中保留的项目的用户来说，随着新增的应用图标和最小化窗口的挤占，Dock 栏会越变越小。这时，Dock 中不活跃的应用程序会影响操作效率。</li></ul>
+<ul><li>对那些希望截取或录制屏幕内容的用户来说，为了保持内容的相关性，常常会在截取或录制之前将不需要的项目从 Dock 栏中移除，结束后再加以恢复，十分费力。</li></ul>
+<p><strong>操作如下</strong>：</p>
+<figure><img src="http://img.smyhvae.com/20200313_1935.png" alt="" loading="lazy"></figure>
+<p>参考链接：<a href="https://sspai.com/post/33493" target="_blank" rel="noopener noreferrer">装点你的 Dock：外观篇丨一日一技 · Mac</a></p>
+<h3 id="sec-20">如何解决MAC软件（dmg，akp，app）出现程序已损坏的提示</h3>
+<p>「xxx.app已损坏,打不开.你应该将它移到废纸篓」，并非你安装的软件已损坏，而是Mac系统的安全设置问题，因为这些应用都是破解或者汉化的,那么解决方法就是临时改变Mac系统安全设置。</p>
+<p>出现这个问题的解决方法：修改系统配置：系统偏好设置... -&gt; 安全性与隐私。修改为任何来源。</p>
+<p>如果没有这个选项的话（macOS Sierra 10.12）,打开终端，执行：</p>
+<pre><code class="language-bash">sudo spctl --master-disable</code></pre>
+<p>即可。</p>
+<h3 id="sec-21">Mac “永久” 隐藏Dock</h3>
+<blockquote>比较实用</blockquote>
+<p>正常情况下，将 Dock 隐藏之后，鼠标悬停在屏幕底部时，Dock 还是会出现。那要如何“永久”隐藏 Dock呢？答案是：更改 Dock 出现的时间就好了。操作如下。</p>
+<p><strong>设置dockc出现的时间</strong>：（在终端输入如下命令）</p>
+<pre><code class="language-bash">#先修改停留时间（后面数字为停留时间）如：
+defaults write com.apple.dock autohide-delay -int 0      ##（时间设为最短）
+defaults write com.apple.dock autohide-delay -int 0.5    ##（时间设为 0.5s）
+defaults write com.apple.dock autohide-delay -int 10     ##（时间设为 10s）
+
+#使设置生效
+killall Dock</code></pre>
+<p>参考链接：<a href="https://www.jianshu.com/p/47cbd4f5e4c3" target="_blank" rel="noopener noreferrer">Mac “永久” 隐藏Dock</a></p>
+<h3 id="sec-22">使用命令行来批量添加文件扩展名</h3>
+<p>参考链接：</p>
+<ul><li><a href="http://www.sdifen.com/mac-rename.html" target="_blank" rel="noopener noreferrer">Mac下如何使用命令行来批量添加文件扩展名</a></li></ul>
+<h3 id="sec-23">Mac 修改终端用户名</h3>
+<pre><code>sudo scutil --set HostName xx</code></pre>
+<p>然后关掉当前终端，重新开一个终端就好了。</p></div>
+<div class="doc-nav"><a href="p11.html"><small>← 上一篇</small>虚拟机</a><a href="p13.html" style="text-align:right"><small>下一篇 →</small>Mac基本操作</a></div>
+</article>
+<aside class="toc"><b>本页目录</b><a class="lv3" href="#sec-0">无法打开 xxx 软件，因为Apple无法检查其是否包含恶意软件</a><a class="lv3" href="#sec-1">Mac M1 芯片的电脑，安装 Git</a><a class="lv3" href="#sec-2">git clone 时，提示错误：Failed to connect to github.com port 443: Connection refused</a><a class="lv3" href="#sec-3">Alfred的自动粘贴功能 Auto-Paste on return 失效，如何解决</a><a class="lv3" href="#sec-4">外接键盘的键位，映射修改</a><a class="lv3" href="#sec-5">Mac到底要不要关机</a><a class="lv3" href="#sec-6">重置 SMC</a><a class="lv3" href="#sec-7">卸载软件后，清除残留</a><a class="lv3" href="#sec-8">Mac 备份微信聊天记录的问题（20180218）</a><a class="lv3" href="#sec-9">电脑锁屏（20180220）</a><a class="lv3" href="#sec-10">修改host文件</a><a class="lv3" href="#sec-11">iPad上取消爱奇艺会员的续费</a><a class="lv3" href="#sec-12">Android手机连接Mac</a><a class="lv3" href="#sec-13">mac下的局域网共享</a><a class="lv3" href="#sec-14">Mac日历设置生日提醒</a><a class="lv3" href="#sec-15">Mac版微信备份时，提示“请将手机和电脑连接至同一网络后”</a><a class="lv3" href="#sec-16">放大/缩小 Mac 微信的分辨率</a><a class="lv3" href="#sec-17">014 管理 iCloud 储存空间</a><a class="lv3" href="#sec-18">Mac 版印象笔记，美化 Markdown 样式</a><a class="lv3" href="#sec-19">让 Dock 只显示已打开的应用程序</a><a class="lv3" href="#sec-20">如何解决MAC软件（dmg，akp，app）出现程序已损坏的提示</a><a class="lv3" href="#sec-21">Mac “永久” 隐藏Dock</a><a class="lv3" href="#sec-22">使用命令行来批量添加文件扩展名</a><a class="lv3" href="#sec-23">Mac 修改终端用户名</a></aside>
+</div>
+<footer><div class="foot-in">内容源自 <a href="https://github.com/qianguyihao/Mac-list" target="_blank" rel="noopener noreferrer">qianguyihao/Mac-list</a>（作者：千古壹号），本站为非官方静态镜像。原仓库未声明开源许可证。</div></footer>
+<script>
+(function(){const d=document.documentElement,t=localStorage.getItem('ml-theme');
+if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))d.dataset.theme='dark';
+document.getElementById('theme').addEventListener('click',()=>{const x=d.dataset.theme==='dark';d.dataset.theme=x?'light':'dark';localStorage.setItem('ml-theme',x?'light':'dark');});})();
+</script>
+</body></html>

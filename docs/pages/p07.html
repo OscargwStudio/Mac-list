@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sublime Text使用技巧 · Mac 清单</title>
+<meta name="theme-color" content="#f6f7f9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='38' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--surface-2:#fbfcfd;--border:#e4e7ec;--border-2:#eef0f3;
+--text:#1c2027;--text-2:#4b5563;--muted:#7a8492;--accent:#2563eb;--accent-soft:#eef4ff;
+--shadow:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.04);
+--radius:12px;--sidebar:246px;--header:64px}
+[data-theme="dark"]{--bg:#111418;--surface:#1a1f26;--surface-2:#1e242c;--border:#2b323c;--border-2:#252c35;
+--text:#e9edf2;--text-2:#b6bfcb;--muted:#8b95a3;--accent:#6ea8ff;--accent-soft:#1b2a44;
+--shadow:0 1px 2px rgba(0,0,0,.2),0 6px 18px rgba(0,0,0,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:132px}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+::selection{background:#cfe0ff;color:#102a58}
+
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 88%,transparent);
+backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1400px;margin:0 auto;height:var(--header);padding:0 28px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;
+font-size:17px;background:linear-gradient(140deg,#3b82f6,#1e40af);box-shadow:0 3px 10px rgba(37,99,235,.25)}
+.brand-t{font-size:16px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand-s{font-size:12px;color:var(--muted);white-space:nowrap}
+.topbar-sp{flex:1}
+.stat{font-size:12px;color:var(--muted);white-space:nowrap}
+.stat b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.icon-btn{width:34px;height:34px;border:1px solid var(--border);background:var(--surface);border-radius:9px;
+display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:.15s}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gh-btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid var(--border);
+border-radius:9px;background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-2);transition:.15s}
+.gh-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.menu-btn{display:none}
+.searchbar{position:sticky;top:var(--header);z-index:45;background:var(--bg);border-bottom:1px solid var(--border)}
+.searchbar-in{max-width:1400px;margin:0 auto;padding:12px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:460px}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#q{width:100%;height:38px;padding:0 62px 0 36px;border:1px solid var(--border);border-radius:10px;
+background:var(--surface);color:var(--text);outline:none;transition:.15s}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);
+border:1px solid var(--border);border-radius:5px;padding:1px 6px;background:var(--surface-2)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{height:30px;padding:0 12px;border:1px solid var(--border);background:var(--surface);border-radius:99px;
+font-size:12.5px;color:var(--text-2);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.result-count{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.result-count b{color:var(--accent);font-variant-numeric:tabular-nums}
+
+.doc-wrap{max-width:960px;margin:0 auto;padding:34px 28px 90px;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:36px}
+.article{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+padding:34px 38px;box-shadow:var(--shadow)}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--accent)}
+.article h1{font-size:26px;margin:0 0 8px;letter-spacing:-.4px}
+.article .meta{font-size:12px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.article h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-2)}
+.article h3{font-size:16px;margin:26px 0 10px}
+.article h4{font-size:14px;margin:20px 0 8px}
+.article p,.article li{color:var(--text-2);font-size:14px;line-height:1.85}
+.article ul,.article ol{padding-left:22px}
+.article li{margin:4px 0}
+.article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-color:#c9daff}
+.article blockquote{margin:14px 0;padding:10px 16px;background:var(--accent-soft);border-left:3px solid var(--accent);
+border-radius:0 8px 8px 0;color:var(--text-2)}
+.article pre{background:#0f172a;color:#e2e8f0;padding:16px 18px;border-radius:10px;overflow-x:auto;
+font-size:12.5px;line-height:1.7}
+.article pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+.article img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;margin:14px auto}
+.article figure{margin:16px 0;text-align:center}
+.article hr{border:0;border-top:1px solid var(--border);margin:26px 0}
+.table-wrap{overflow-x:auto;margin:14px 0}
+.article table{border-collapse:collapse;width:100%;font-size:13px}
+.article th,.article td{border:1px solid var(--border);padding:8px 11px;text-align:left}
+.article th{background:var(--surface-2);font-weight:650}
+.toc{position:sticky;top:calc(var(--header) + 80px);align-self:start;font-size:12.5px}
+.toc b{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.toc a{display:block;padding:4px 0 4px 10px;border-left:2px solid var(--border);color:var(--text-2);
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.toc a.lv3{padding-left:22px;font-size:12px;color:var(--muted)}
+.doc-nav{display:flex;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--border)}
+.doc-nav a{flex:1;padding:11px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+font-size:12.5px;color:var(--text-2)}
+.doc-nav a:hover{border-color:var(--accent);color:var(--accent)}
+.doc-nav small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+@media(max-width:900px){.doc-wrap{grid-template-columns:1fr;padding:20px 14px 60px}.toc{display:none}.article{padding:22px 18px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+<div class="brand"><div class="logo">M</div><div><div class="brand-t">Mac 清单</div><div class="brand-s">Mac 软件清单 &amp; 使用技巧</div></div></div>
+<div class="topbar-sp"></div>
+<button class="icon-btn" id="theme" title="切换深浅色" aria-label="切换主题"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+<a class="gh-btn" href="../index.html">← 返回清单</a>
+</div></header>
+<div class="doc-wrap">
+<article class="article">
+<div class="crumb"><a href="../index.html">首页</a> / 软件专题 / Sublime Text使用技巧</div>
+<h1>Sublime Text使用技巧</h1><div class="meta">内容源自 qianguyihao/Mac-list · 02-其他软件/Sublime Text使用技巧.md</div>
+<div class="md-body"><hr>
+<p>title: Sublime Text快捷键 date: 2016-05-18 12:39:04 categories:</p>
+<ul><li>技术</li></ul>
+<p>tags:</p>
+<ul><li>工具</li></ul>
+<hr>
+<h2 id="sec-2">下载</h2>
+<ul><li><a href="http://www.sublimetext.com/3" target="_blank" rel="noopener noreferrer">Sublime Text 3 官方下载地址</a></li></ul>
+<h2 id="sec-3">注册码</h2>
+<h3 id="sec-4">Sublime Text 3 3126</h3>
+<ul><li><a href="https://fatesinger.com/78705" target="_blank" rel="noopener noreferrer">Sublime Text 3 3126 注册码</a></li></ul>
+<h3 id="sec-5">Sublime Text 3 3143</h3>
+<p>注册码：</p>
+<pre><code>—– BEGIN LICENSE —–
+TwitterInc
+200 User License
+EA7E-890007
+1D77F72E 390CDD93 4DCBA022 FAF60790
+61AA12C0 A37081C5 D0316412 4584D136
+94D7F7D4 95BC8C1C 527DA828 560BB037
+D1EDDD8C AE7B379F 50C9D69D B35179EF
+2FE898C4 8E4277A8 555CE714 E1FB0E43
+D5D52613 C3D12E98 BC49967F 7652EED2
+9D2D2E61 67610860 6D338B72 5CF95C69
+E36B85CC 84991F19 7575D828 470A92AB
+—— END LICENSE ——</code></pre>
+<p>参考链接：</p>
+<ul><li><a href="http://blog.csdn.net/weixin_39768635/article/details/77979793" target="_blank" rel="noopener noreferrer">csdn</a></li></ul>
+<h2 id="sec-6">个人最常用的快捷键</h2>
+<p>快捷键完整版见最后一段，本段只列个人习惯。</p>
+<p><strong>四种 Goto ：</strong></p>
+<ul><li><code>Ctrl + P</code>：文件定位</li></ul>
+<ul><li><code>Ctrl + ;</code>：词语定位 #</li></ul>
+<ul><li><code>Ctrl + R</code>：函数定位 @</li></ul>
+<ul><li><code>Ctrl + G</code>：行号定位 :</li></ul>
+<h2 id="sec-7">编辑器配置</h2>
+<p><strong>修改配置路径：</strong>Sublime Text -&gt; Preferences -&gt; Settings-User</p>
+<p>以下配置，可以根据个人喜好可以进行修改。</p>
+<pre><code class="language-bash">
+&quot;always_show_minimap_viewport&quot;: true, #是否总是显示小地图
+&quot;draw_minimap_border&quot;: true, # 让minimap里的当前位置更显眼点.
+&quot;highlight_modified_tabs&quot;: true, # 修改了而尚未保存的 tab, 会用橘黄色显示
+&quot;ignored_packages&quot;:
+[
+   &quot;Vintage&quot;
+],
+&quot;show_full_path&quot;: true, # 标题栏上显示完整路径
+&quot;show_line_endings&quot;: true, # 文档到达底部会在最后一行
+&quot;open_files_in_new_window&quot;: false, #  在 Finder 里打开文件时, 不会新开窗口了
+&quot;translate_tabs_to_spaces&quot;: true #将tab键的形式转成空格</code></pre>
+<h4 id="sec-8">高亮当前行</h4>
+<pre><code class="language-bash">&quot;highlight_line&quot;: true</code></pre>
+<p>这个设置会让让光标所处在的那一行高亮，只是稍微亮一点，但你可以立马找到他。</p>
+<h3 id="sec-9">焦点丢失后自动保存</h3>
+<pre><code class="language-bash">&quot;save_on_focus_lost&quot;: true</code></pre>
+<p>顾名思义，当你把焦点从当前编辑的文件移开的时候，这个文件会自动的保存掉。估计很多人有时会呆呆的调试一个没有保存的文件，所以这个设置可以说是一个必需品。</p>
+<h3 id="sec-10">保存的时候把无用的空格去掉</h3>
+<pre><code class="language-bash">&quot;trim_trailing_white_space_on_save&quot;: true</code></pre>
+<p>这里去掉的是每一行文本最后面的空格，这些空格显然是没有什么用处的。如果手动去删除和检查的话，估计你会很烦心。当然至于要不要删掉，还是看你的需求。</p>
+<h4 id="sec-11">显示当前文件的编码</h4>
+<pre><code>&quot;show_encoding&quot;: true</code></pre>
+<p>为了避免一些低级错误，这个设置还是相当有用的。当你开启后，在编辑器的右下角会显示当前文件的编码。</p>
+<h4 id="sec-12">在新标签页中打开新的文件</h4>
+<pre><code class="language-bash">&quot;preview_on_click&quot;: false</code></pre>
+<p>默认的配置项中，单击一个新的文件后，会覆盖当前的标签页，这种体验很不好。<code>&quot;open_files_in_new_window&quot;: true</code>这个设置项默认已经有了，但并没有达到预期的效果。</p>
+<p>如果想在新的标签页中打开新的文件，可以设置此参数；设置后，打开文件需要双击。</p>
+<p>还有一种方法是尝试增加属性<code>&quot;preview_on_click&quot;: false</code>，但是这样的话，需要双击才能打开新的文件。体验不好。</p>
+<p>使用新标签打开文件，防止把以前打开的文件给覆盖掉。</p>
+<p>参考链接：</p>
+<ul><li><a href="https://segmentfault.com/a/1190000002596724" target="_blank" rel="noopener noreferrer">segmentfault</a></li></ul>
+<ul><li><a href="https://mac.aotu.io/docs/dev-fd/sublime-text.html" target="_blank" rel="noopener noreferrer">MAC全栈开发环境搭建指南</a></li></ul>
+<h2 id="sec-13">插件</h2>
+<h3 id="sec-14">安装Package Control</h3>
+<p><strong>方法一：</strong></p>
+<p>先装插件管理器：<a href="https://packagecontrol.io/installation" target="_blank" rel="noopener noreferrer">Package Control</a>，用它我们可以很方便的浏览、安装和卸载Sublime Text中的插件。步骤如下：</p>
+<p>（1）使用「Ctrl + `」打开Sublime Text控制台，将下面的代码粘贴到控制台里：</p>
+<pre><code>import urllib.request,os; pf = &#x27;Package Control.sublime-package&#x27;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), &#x27;wb&#x27;).write(urllib.request.urlopen( &#x27;http://sublime.wbond.net/&#x27; + pf.replace(&#x27; &#x27;,&#x27;%20&#x27;)).read())</code></pre>
+<p>等待Package Control安装完成。</p>
+<p>重启。</p>
+<p>如果顺利的话，此时就可以在Preferences菜单下看到Package Settings和Package Control两个菜单了。</p>
+<p>（2）用<code>Ctrl + Shift + P</code>打开命令板，输入<code>PCI</code>应出现Package Control。此时表明安装成功。</p>
+<p>之后，我们就可以方便的安装使用Sublime Text的各种插件了。</p>
+<p><strong>方法二：</strong>（Sublime Text 3143的安装）</p>
+<p>如果安装的是Sublime Text 3143，上面的方法一可能会失效。此时可尝试方法二。</p>
+<p>方法二在我的mac上可行，在我的win上不可行。</p>
+<p><strong>方法二：</strong>（离线安装）</p>
+<p>方法二应该对所有版本的Sublime Text均适用。步骤如下。</p>
+<ul><li>关闭Sublime Text 3，去&lt;https://github.com/wbond/package_control/releases&gt;下载一个zip包。</li><li>将包内的顶层文件夹解压至C:\Users\&lt;你的用户名&gt;\AppData\Roaming\Sublime Text 3\Packages路径下（找不到AppData的请显示系统文件夹及隐藏文件夹，或者直接在地址中输入该路径），重命名package_control-3.3.1-beta2（与下载版本名称有关）为Package Control</li><li>打开Sublime Text 3（刚打开时会自动安装Package Control，按<code>Ctrl+</code>可以在控制台中查看进度），安装完Package Control后按Ctrl+Shift+P，输入“Install”来搜索Package Control。</li></ul>
+<p>参考链接：<a href="http://blog.csdn.net/swhard/article/details/78930371" target="_blank" rel="noopener noreferrer">csdn</a></p>
+<h3 id="sec-15">无法安装插件的问题</h3>
+<p>Package control 好不容易安装好了，当你尝试去安装别的插件的时候，可能发现报错如下：</p>
+<pre><code> There are no packages available for installation</code></pre>
+<p>解决办法如下：</p>
+<p>打开目录<code>C:\Users\smyhvae\AppData\Roaming\Sublime Text 3\Packages\User\</code>下的<code>Package Control.sublime-settings</code>文件，添加一行&quot;channels&quot;字段：</p>
+<pre><code class="language-bash">
+&quot;channels&quot;:
+[
+	&quot;https://wilon.github.io/static/channel_v3.json&quot;
+],</code></pre>
+<p>上面的&quot;channels&quot;字段是添加的url路径。如果认为上面的链接太慢，还可以指定本地的channel_v3.json路径（推荐此方法），方法如下：</p>
+<ul><li>下载json文件：packagecontrol.io下载 或 <a href="https://wilon.github.io/static/channel_v3.json" target="_blank" rel="noopener noreferrer">GitHub下载</a></li><li>将下载好的文件放到Sublime Text的安装目录下。</li><li>将上面的&quot;channels&quot;字段改为</li></ul>
+<pre><code class="language-bash">&quot;channels&quot;:
+[
+	&quot;C:/Program Files/Sublime Text 3/channel_v3.json&quot;
+],</code></pre>
+<p>参考链接：</p>
+<ul><li><a href="https://www.zhihu.com/question/34386189/answer/80188612" target="_blank" rel="noopener noreferrer">知乎</a></li></ul>
+<ul><li><a href="http://blog.csdn.net/q2365921/article/details/74298371" target="_blank" rel="noopener noreferrer">csdn</a></li></ul>
+<h3 id="sec-16">中文输入法中，光标无法跟随</h3>
+<p>解决办法：安装<code>IMESupport</code>这个插件。貌似目前只支持windows，在搜索等界面不能很好的跟随光标。</p>
+<p>操作：Ctrl + Shift + P →输入pci →输入IMESupport →回车。</p>
+<h3 id="sec-17">中文乱码的问题</h3>
+<p>解决办法：安装插件<code>ConvertToUTF8</code>。</p>
+<p>如果是在Mac上使用的话，还得安装一个插件<code>Codecs33</code></p>
+<h3 id="sec-18">在Sublime Text中进行markdown写作</h3>
+<p><strong>（1）安装主题：实现markdown语法高亮。</strong></p>
+<p>安装  Package Control之后，安装插件<code>Monokai Extended</code>和<code>Markdown Extended</code>。步骤如下：</p>
+<ul><li>Shift + Command + P 调出 Command Palette，输入 pci（模糊匹配），找到 Package Control: Install Package，回车;</li><li>分别输入两个插件名称、回车，等待安装；</li><li>点击 Sublime 右下角文档格式，在列表最上方名为 Open all with current extension as 二级列表中选择 Markdown Extended；</li><li>在 Preferences——Color Scheme——Mononkai Extended 下选择一个皮肤，我选的是<code>Bright主题</code>。效果如下：</li></ul>
+<p>参考链接：<a href="https://wzzlj.gitbooks.io/wzzljomooc2py/content/Begin/peizhi_sublime_markdown.html" target="_blank" rel="noopener noreferrer">确实是近乎完美的 markdown 写作体验</a></p>
+<p>上面这个链接也讲到了gitbook的使用，可以参考下。</p>
+<p>，再推荐一个很漂亮的主题：<a href="https://github.com/equinusocio/material-theme" target="_blank" rel="noopener noreferrer">Material Theme</a></p>
+<p><strong>（2）实现实时预览：</strong></p>
+<p>同样是在<code>install package</code>中安装插件<code>OmniMarkupPreviewer</code>。因为网的原因，这个插件安装的时间会比较久。</p>
+<p>插件安装成功后我们就可以使用快捷键对编辑的markdown源文件进行预览了。下面是几个常用快捷键：</p>
+<ul><li><strong>Ctrl + Alt + O</strong>：在浏览器中<strong>实时预览</strong>（非常实用）</li><li>Ctrl + Alt + X：导出HTML</li><li>Ctrl+Alt+C：HTML标记拷贝至剪贴板</li></ul>
+<p>参考链接：<a href="http://www.jianshu.com/p/335b7d1be39e" target="_blank" rel="noopener noreferrer">介绍Sublime3下两款Markdown插件</a></p>
+<p>预览的时候，如果出现下面这样的错误：</p>
+<figure><img src="http://img.smyhvae.com/201801101430.png" alt="" loading="lazy"></figure>
+<p>解决办法：</p>
+<p>Sublime Text &gt; Preferences &gt; Package Settings &gt; OmniMarkupPreviewer &gt; Settings - User。复制粘贴下面代码保存：</p>
+<pre><code class="language-bash">{
+    &quot;renderer_options-MarkdownRenderer&quot;: {
+        &quot;extensions&quot;: [&quot;tables&quot;, &quot;fenced_code&quot;, &quot;codehilite&quot;]
+    }
+}</code></pre>
+<p>参考链接：</p>
+<ul><li><a href="https://www.jianshu.com/p/d8367fec0edf" target="_blank" rel="noopener noreferrer">关于OmniMarkupPreviewer 404</a></li><li><a href="https://github.com/timonwong/OmniMarkupPreviewer/issues/85" target="_blank" rel="noopener noreferrer">issues</a></li></ul>
+<h3 id="sec-19">侧边栏增强插件：SideBarEnhancements</h3>
+<p>侧边栏右键的时候，默认选项比较少；</p>
+<p>20180110_2023.png</p>
+<p>安装了插件<code>SideBarEnhancements</code>之后，侧边栏的选项变多了：</p>
+<p>20180110_2029.png</p>
+<h3 id="sec-20">其他插件</h3>
+<ul><li><code>Bracket Highlighter</code>：匹配括号高亮，自带的感觉高亮不强。</li></ul>
+<ul><li><code>Emmet</code>：前端工程师利器，各种代码补全自动生成。</li></ul>
+<h2 id="sec-21">使用技巧</h2>
+<h3 id="sec-22">在Sublime Text 中进行代码格式化</h3>
+<p>其实在sublime中已经自建了格式化按钮：</p>
+<p>Edit  -&gt;  Line  -&gt;  Reindent  ｝</p>
+<p>只是sublime并没有给他赋予快捷键，所以只需加上快捷键即可。</p>
+<p>参考链接：<a href="http://blog.csdn.net/vic___/article/details/12615089" target="_blank" rel="noopener noreferrer">Sublime 格式化代码 快捷键以及插件使用</a></p>
+<h3 id="sec-23">鼠标中键的使用</h3>
+<p>按住鼠标中键，往下拖动（不是滚动鼠标），它达到的效果等同于：Ctrl+鼠标左键单击。</p>
+<h2 id="sec-24">mac下的使用</h2>
+<h3 id="sec-25">字体放大缩小</h3>
+<p>快捷键：<code>command + 加号</code>是放大字体。</p>
+<h2 id="sec-26">快捷键汇总</h2>
+<h3 id="sec-27">编辑</h3>
+<div class="table-wrap"><table><thead><tr><th>Win快捷键</th><th>Mac快捷键</th><th>作用</th><th>备注</th></tr></thead><tbody><tr><td>Ctrl + Enter</td><td></td><td>在当前行下面新增一行然后跳至该行</td><td>即使光标不在行尾，也能快速向下插入一行。</td></tr><tr><td>Ctrl + Shift + Enter</td><td></td><td>在当前行上面增加一行并跳至该行</td><td></td></tr><tr><td><strong>Ctrl + Shift + D</strong></td><td></td><td>复制当前行到下一行</td><td></td></tr><tr><td><strong>Ctrl+K+K</strong></td><td></td><td>从光标处开始删除代码至行尾。按住Ctrl，按两次K</td><td></td></tr><tr><td>Ctrl+Shift+K</td><td></td><td>删除整行</td><td></td></tr><tr><td>Ctrl+H</td><td>Option+Cmd+F</td><td>查找替换</td></tr><tr><td>Ctrl+/</td><td></td><td>注释单行</td><td></td></tr><tr><td>Ctrl+Shift+/</td><td></td><td>注释多行</td><td></td></tr><tr><td>Ctrl+K+U</td><td></td><td>转换大写</td><td></td></tr><tr><td>Ctrl+K+L</td><td></td><td>转换小写</td><td></td></tr><tr><td>Ctrl+F2</td><td></td><td>设置书签，F2切换书签*</td><td></td></tr><tr><td>Ctrl+T</td><td></td><td>左右字母互换</td><td></td></tr><tr><td>F6</td><td></td><td>单词检测拼写</td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody></table></div>
+<h3 id="sec-28">选择</h3>
+<div class="table-wrap"><table><thead><tr><th>Win快捷键</th><th>Mac快捷键</th><th>作用</th><th>备注</th></tr></thead><tbody><tr><td>Ctrl+鼠标左键单击</td><td></td><td>集体输入</td></tr><tr><td>Ctrl + D</td><td></td><td>选择当前光标所在的词并高亮该词所有出现的位置，再次按<code>Ctrl + D</code>选择该词出现的下一个位置。</td><td>在多重选词的过程中，使用<code>Ctrl + K</code>进行跳过，使用<code>Ctrl + U</code>进行回退，使用<code>Esc</code>退出多重编辑</td></tr><tr><td><strong>Alt + F3</strong></td><td></td><td>选中文本按下快捷键，即可一次性选择全部的相同文本进行同时编辑</td><td>例如快速选中并更改所有相同的变量名、函数名等。</td></tr><tr><td><strong>Ctrl + Shift +【↑/↓</strong></td><td>Ctrl + Cmd +↑/↓</td><td>移动当前行</td><td></td></tr><tr><td>Ctrl+L</td><td></td><td>选中整行，继续操作则继续选择下一行，效果和 <code>Shift + ↓</code> 效果一样</td><td></td></tr><tr><td><strong>Ctrl+Shift+L</strong></td><td></td><td>先选中多行，再按下快捷键，会在每行行尾插入光标，即可同时编辑这些行</td><td>经常与上一个快捷键结合起来使用</td></tr><tr><td><strong>Ctrl + J</strong></td><td></td><td>把当前选中区域合并为一行</td><td></td></tr><tr><td>Ctrl + ←/→</td><td></td><td>进行逐词移动</td><td></td></tr><tr><td>Ctrl + ↑/↓</td><td></td><td>移动当前显示区域</td><td></td></tr><tr><td>Shift + ↑/↓</td><td></td><td>一行一行地进行选中</td><td></td></tr><tr><td>Ctrl + Shift + ←/→</td><td></td><td>进行逐词选择</td><td></td></tr><tr><td>Ctrl + M</td><td></td><td>光标移动至括号内结束或开始的位置</td></tr><tr><td>Ctrl + Shift + M</td><td></td><td>快速选择括号间的内容</td><td></td></tr><tr><td>Ctrl + Shift + J</td><td></td><td>快速选择同缩进的内容</td><td></td></tr><tr><td>Ctrl + Shift + Space</td><td></td><td>快速选择当前作用域（Scope）的内容</td><td></td></tr><tr><td>Ctrl+Shift+[</td><td></td><td>选中代码，按下快捷键，折叠代码。</td><td></td></tr><tr><td>Ctrl+Shift+]</td><td></td><td>选中代码，按下快捷键，展开代码。</td><td></td></tr><tr><td>Ctrl+K+0</td><td></td><td>展开所有折叠代码。</td><td></td></tr></tbody></table></div>
+<h3 id="sec-29">多重选择（Multi-Selection）</h3>
+<p>多重选择功能允许在页面中同时存在多个光标，让很多本来需要正则表达式、高级搜索和替换才能完成的任务也变得游刃有余。</p>
+<p>激活多重选择的方法有两几种：</p>
+<ul><li>按住 Ctrl 然后在页面中希望中现光标的位置点击。</li><li>选择数行文本，然后按下 Shift + Ctrl + L。</li></ul>
+<p>通过反复按下 Ctrl + D 即可将全文中与光标当前所在位置的词相同的词逐一加入选择，而直接按下 Alt+F3即可一次性选择所有相同的词。</p>
+<ul><li>按下鼠标中键来进行垂直方向的纵列选择，也可以进入多重编辑状态。</li></ul>
+<h3 id="sec-30">搜索</h3>
+<ul><li><code>Ctrl + Shift + F</code>：多文件查找&amp;替换</li></ul>
+<p>在文件夹内查找，与普通编辑器不同的地方是sublime允许添加多个文件夹进行查找。</p>
+<ul><li><code>F3</code>：跳至当前关键字下一个位置</li></ul>
+<ul><li><code>Shift + F3</code>：跳到当前关键字上一个位置</li></ul>
+<ul><li><code>Ctrl + F/H</code>：进行标准查找/替换，之后：</li></ul>
+<ul><li><code>Alt + C</code>：切换大小写敏感（Case-sensitive）模式</li></ul>
+<ul><li><code>Alt + W</code>：切换整字匹配（Whole matching）模式</li></ul>
+<ul><li><code>Alt + R</code>：切换正则匹配（Regex matching）模式</li></ul>
+<ul><li><code>Ctrl + Shift + H</code>：替换当前关键字</li></ul>
+<ul><li><code>Ctrl + Alt + Enter</code>：替换所有关键字匹配</li></ul>
+<ul><li>`Ctrl + P：打开搜索框，跳转到指定文件。输入文件名后可以：</li></ul>
+<ul><li>输入当前项目中的文件名，快速搜索文件；</li></ul>
+<ul><li>输入@和关键字，查找文件中函数名；</li></ul>
+<ul><li>输入：和数字，跳转到文件中该行代码；</li></ul>
+<ul><li>输入#和关键字，查找变量名</li></ul>
+<ul><li><code>Ctrl + R</code>：打开搜索框，自带<code>@</code>，输入关键字，查找文件中的函数名。</li></ul>
+<p>例如：在函数较多的页面快速查找某个函数。</p>
+<ul><li><code>Ctrl + G</code>：打开搜索框，自动带<code>:</code>，输入数字跳转到该行代码。</li></ul>
+<p>例如：在页面代码比较长的文件中快速定位。</p>
+<ul><li><code>Ctrl+ </code>：打开搜索框，自动带<code>@</code>，输入关键字，查找文件中的函数名。</li></ul>
+<p>例如：在函数较多的页面快速查找某个函数。</p>
+<h3 id="sec-31">显示</h3>
+<div class="table-wrap"><table><thead><tr><th>快捷键</th><th>作用</th><th>备注</th></tr></thead><tbody><tr><td>Ctrl+Tab</td><td>按文件浏览过的顺序，切换当前窗口的标签页</td><td></td></tr><tr><td>Ctrl+PageDown</td><td>向左切换当前窗口的标签页</td><td></td></tr><tr><td>Ctrl+PageUp</td><td>向右切换当前窗口的标签页</td><td></td></tr><tr><td>F11</td><td>普通全屏</td><td></td></tr><tr><td>Shift + F11</td><td>免打扰全屏</td><td></td></tr><tr><td>Alt + Shift + 1</td><td>窗口分屏，恢复默认1屏</td><td>非小键盘的数字</td></tr><tr><td>Alt + Shift + 2</td><td>左右分屏-2列</td><td></td></tr><tr><td>Alt + Shift + 3</td><td>左右分屏-3列</td><td></td></tr><tr><td>Alt + Shift + 4</td><td>左右分屏-4列</td><td></td></tr><tr><td>Alt + Shift + 5</td><td>上下左右分屏-等分4屏</td><td></td></tr><tr><td>Alt + Shift + 8</td><td>上下分屏-2行</td><td></td></tr><tr><td>Alt + Shift + 9</td><td>上下分屏-3行</td><td></td></tr><tr><td>Ctrl+K+B</td><td>开启/关闭侧边栏</td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody></table></div>
+<p>备注：分屏之后，使用<code>Ctrl + 数字键</code>跳转到指定屏，使用<code>Ctrl + Shift + 数字键</code>将当前屏移动到指定屏</p>
+<h3 id="sec-32">窗口</h3>
+<p><code>Ctrl + N</code>：在当前窗口创建一个新标签</p>
+<p><code>Ctrl + Shift + N</code>：创建一个新窗口</p>
+<p><code>Ctrl + Shift + T</code>：恢复刚刚关闭的标签</p>
+<h3 id="sec-33">其他</h3>
+<ul><li><code>Ctrl + Shift + P</code>：调出命令板（Command Palette）</li></ul>
+<ul><li><code>Ctrl + </code>：调出控制台</li></ul>
+<h2 id="sec-34">参考链接</h2>
+<ul><li><a href="http://www.cnblogs.com/figure9/p/sublime-text-complete-guide.html" target="_blank" rel="noopener noreferrer">Sublime Text 全程指引 by Lucida</a>【荐】</li></ul>
+<ul><li><a href="http://lovenight.github.io/2015/11/30/%E6%88%91%E7%9A%84Sublime-Text-3-%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener noreferrer">我的Sublime Text 3 配置</a></li></ul>
+<ul><li><a href="https://www.zhihu.com/question/19976788" target="_blank" rel="noopener noreferrer">知乎：Sublime Text 有哪些实用技巧？</a></li></ul>
+<ul><li><a href="http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/" target="_blank" rel="noopener noreferrer">如何优雅地使用Sublime Text3</a></li></ul>
+<ul><li><a href="http://chinagdg.org/2016/02/ttt1-sublime-plugins/" target="_blank" rel="noopener noreferrer">面向 Web 开发者的 Sublime Text 插件</a></li></ul>
+<ul><li><a href="http://www.css88.com/archives/5858" target="_blank" rel="noopener noreferrer">Sublime Text 3最好的功能、插件和设置</a></li></ul>
+<ul><li><a href="http://tinyletter.com/CnFeat/letters/sublime-text-markdown" target="_blank" rel="noopener noreferrer">Sublime Text：我的极简 Markdown 编辑器</a></li></ul>
+<ul><li>[如何优雅地使用 Sublime Text3 [OS X]](http://qiudeqing.com/tools/2015/05/31/sublime-text-3.html)</li></ul>
+<ul><li><a href="http://chinagdg.org/2016/02/ttt2-seti-ui/" target="_blank" rel="noopener noreferrer">Seti UI 主题: 让你编辑器焕然一新</a></li></ul>
+<ul><li><a href="https://www.zybuluo.com/king/note/47271" target="_blank" rel="noopener noreferrer">Sublime Text 3 配置和使用方法</a></li></ul>
+<ul><li><a href="http://www.oschina.net/translate/20-powerful-sublimetext-plugins" target="_blank" rel="noopener noreferrer">20 个强大的 Sublime Text 插件</a></li></ul>
+<ul><li><a href="http://chinagdg.org/2015/12/%E5%83%8F-sublime-text-%E4%B8%80%E6%A0%B7%E4%BD%BF%E7%94%A8-chrome-devtools/" target="_blank" rel="noopener noreferrer">像 Sublime Text 一样使用 Chrome DevTools</a></li></ul>
+<p>网站的这篇文章也可以看看：<a href="http://chinagdg.org/2016/04/android-studio-2-0/" target="_blank" rel="noopener noreferrer">http://chinagdg.org/2016/04/android-studio-2-0/</a></p>
+<ul><li><a href="http://w3cboy.com/post/2014/01/sublime%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/" target="_blank" rel="noopener noreferrer">sublime text插件推荐</a></li></ul>
+<ul><li><a href="http://blog.csdn.net/moyan_min/article/details/11530751" target="_blank" rel="noopener noreferrer"> Sublime Text3 快捷键汇总及设置快捷键配置环境变量</a></li></ul>
+<p>传智播客推荐的参考链接。</p>
+<h3 id="sec-35">mac篇</h3>
+<ul><li><a href="https://code.kpman.cc/2014/10/14/sublime-text-3-mac-%E6%8C%87%E5%8D%97/" target="_blank" rel="noopener noreferrer">Sublime Text 3 Mac 指南</a></li></ul>
+<h3 id="sec-36">2018-06-24</h3>
+<ul><li><a href="https://mp.weixin.qq.com/s/N2O7MZi3InGTKeBhY2Ut2g" target="_blank" rel="noopener noreferrer">将 Sublime Text 打造成微信公众号文章编辑排版神器（一）</a></li></ul>
+<ul><li><a href="https://mp.weixin.qq.com/s/QnrIz40XD3_8jCQ_ykWDqg" target="_blank" rel="noopener noreferrer">将 Sublime Text 打造成微信公众号文章编辑排版神器（二）</a></li></ul>
+<ul><li><a href="https://mp.weixin.qq.com/s/bBwR8rKrrdeWu1ckP_LdSg" target="_blank" rel="noopener noreferrer">将 Sublime Text 打造成微信公众号文章编辑排版神器（三）</a></li></ul>
+<h3 id="sec-37">markdown 相关</h3>
+<ul><li><a href="https://juejin.im/post/5c1609b2e51d45766d4e9bad" target="_blank" rel="noopener noreferrer">Sublime Text3 Markdown 编辑 + 实时预览</a></li></ul></div>
+<div class="doc-nav"><a href="p06.html"><small>← 上一篇</small>Sketch的使用</a><a href="p08.html" style="text-align:right"><small>下一篇 →</small>Ulysses：理想中的写作软件</a></div>
+</article>
+<aside class="toc"><b>本页目录</b><a class="" href="#sec-2">下载</a><a class="" href="#sec-3">注册码</a><a class="lv3" href="#sec-4">Sublime Text 3 3126</a><a class="lv3" href="#sec-5">Sublime Text 3 3143</a><a class="" href="#sec-6">个人最常用的快捷键</a><a class="" href="#sec-7">编辑器配置</a><a class="lv3" href="#sec-9">焦点丢失后自动保存</a><a class="lv3" href="#sec-10">保存的时候把无用的空格去掉</a><a class="" href="#sec-13">插件</a><a class="lv3" href="#sec-14">安装Package Control</a><a class="lv3" href="#sec-15">无法安装插件的问题</a><a class="lv3" href="#sec-16">中文输入法中，光标无法跟随</a><a class="lv3" href="#sec-17">中文乱码的问题</a><a class="lv3" href="#sec-18">在Sublime Text中进行markdown写作</a><a class="lv3" href="#sec-19">侧边栏增强插件：SideBarEnhancements</a><a class="lv3" href="#sec-20">其他插件</a><a class="" href="#sec-21">使用技巧</a><a class="lv3" href="#sec-22">在Sublime Text 中进行代码格式化</a><a class="lv3" href="#sec-23">鼠标中键的使用</a><a class="" href="#sec-24">mac下的使用</a><a class="lv3" href="#sec-25">字体放大缩小</a><a class="" href="#sec-26">快捷键汇总</a><a class="lv3" href="#sec-27">编辑</a><a class="lv3" href="#sec-28">选择</a><a class="lv3" href="#sec-29">多重选择（Multi-Selection）</a><a class="lv3" href="#sec-30">搜索</a><a class="lv3" href="#sec-31">显示</a><a class="lv3" href="#sec-32">窗口</a><a class="lv3" href="#sec-33">其他</a><a class="" href="#sec-34">参考链接</a><a class="lv3" href="#sec-35">mac篇</a><a class="lv3" href="#sec-36">2018-06-24</a><a class="lv3" href="#sec-37">markdown 相关</a></aside>
+</div>
+<footer><div class="foot-in">内容源自 <a href="https://github.com/qianguyihao/Mac-list" target="_blank" rel="noopener noreferrer">qianguyihao/Mac-list</a>（作者：千古壹号），本站为非官方静态镜像。原仓库未声明开源许可证。</div></footer>
+<script>
+(function(){const d=document.documentElement,t=localStorage.getItem('ml-theme');
+if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))d.dataset.theme='dark';
+document.getElementById('theme').addEventListener('click',()=>{const x=d.dataset.theme==='dark';d.dataset.theme=x?'light':'dark';localStorage.setItem('ml-theme',x?'light':'dark');});})();
+</script>
+</body></html>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mac快捷键 · Mac 清单</title>
+<meta name="theme-color" content="#f6f7f9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='38' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--surface-2:#fbfcfd;--border:#e4e7ec;--border-2:#eef0f3;
+--text:#1c2027;--text-2:#4b5563;--muted:#7a8492;--accent:#2563eb;--accent-soft:#eef4ff;
+--shadow:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.04);
+--radius:12px;--sidebar:246px;--header:64px}
+[data-theme="dark"]{--bg:#111418;--surface:#1a1f26;--surface-2:#1e242c;--border:#2b323c;--border-2:#252c35;
+--text:#e9edf2;--text-2:#b6bfcb;--muted:#8b95a3;--accent:#6ea8ff;--accent-soft:#1b2a44;
+--shadow:0 1px 2px rgba(0,0,0,.2),0 6px 18px rgba(0,0,0,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:132px}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+::selection{background:#cfe0ff;color:#102a58}
+
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 88%,transparent);
+backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1400px;margin:0 auto;height:var(--header);padding:0 28px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.logo{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;
+font-size:17px;background:linear-gradient(140deg,#3b82f6,#1e40af);box-shadow:0 3px 10px rgba(37,99,235,.25)}
+.brand-t{font-size:16px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand-s{font-size:12px;color:var(--muted);white-space:nowrap}
+.topbar-sp{flex:1}
+.stat{font-size:12px;color:var(--muted);white-space:nowrap}
+.stat b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.icon-btn{width:34px;height:34px;border:1px solid var(--border);background:var(--surface);border-radius:9px;
+display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:.15s}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gh-btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid var(--border);
+border-radius:9px;background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-2);transition:.15s}
+.gh-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.menu-btn{display:none}
+.searchbar{position:sticky;top:var(--header);z-index:45;background:var(--bg);border-bottom:1px solid var(--border)}
+.searchbar-in{max-width:1400px;margin:0 auto;padding:12px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:460px}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+#q{width:100%;height:38px;padding:0 62px 0 36px;border:1px solid var(--border);border-radius:10px;
+background:var(--surface);color:var(--text);outline:none;transition:.15s}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);
+border:1px solid var(--border);border-radius:5px;padding:1px 6px;background:var(--surface-2)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{height:30px;padding:0 12px;border:1px solid var(--border);background:var(--surface);border-radius:99px;
+font-size:12.5px;color:var(--text-2);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.result-count{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.result-count b{color:var(--accent);font-variant-numeric:tabular-nums}
+
+.doc-wrap{max-width:960px;margin:0 auto;padding:34px 28px 90px;display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:36px}
+.article{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+padding:34px 38px;box-shadow:var(--shadow)}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--accent)}
+.article h1{font-size:26px;margin:0 0 8px;letter-spacing:-.4px}
+.article .meta{font-size:12px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.article h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-2)}
+.article h3{font-size:16px;margin:26px 0 10px}
+.article h4{font-size:14px;margin:20px 0 8px}
+.article p,.article li{color:var(--text-2);font-size:14px;line-height:1.85}
+.article ul,.article ol{padding-left:22px}
+.article li{margin:4px 0}
+.article a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-color:#c9daff}
+.article blockquote{margin:14px 0;padding:10px 16px;background:var(--accent-soft);border-left:3px solid var(--accent);
+border-radius:0 8px 8px 0;color:var(--text-2)}
+.article pre{background:#0f172a;color:#e2e8f0;padding:16px 18px;border-radius:10px;overflow-x:auto;
+font-size:12.5px;line-height:1.7}
+.article pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+.article img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;margin:14px auto}
+.article figure{margin:16px 0;text-align:center}
+.article hr{border:0;border-top:1px solid var(--border);margin:26px 0}
+.table-wrap{overflow-x:auto;margin:14px 0}
+.article table{border-collapse:collapse;width:100%;font-size:13px}
+.article th,.article td{border:1px solid var(--border);padding:8px 11px;text-align:left}
+.article th{background:var(--surface-2);font-weight:650}
+.toc{position:sticky;top:calc(var(--header) + 80px);align-self:start;font-size:12.5px}
+.toc b{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.toc a{display:block;padding:4px 0 4px 10px;border-left:2px solid var(--border);color:var(--text-2);
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.toc a.lv3{padding-left:22px;font-size:12px;color:var(--muted)}
+.doc-nav{display:flex;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--border)}
+.doc-nav a{flex:1;padding:11px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+font-size:12.5px;color:var(--text-2)}
+.doc-nav a:hover{border-color:var(--accent);color:var(--accent)}
+.doc-nav small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
+@media(max-width:900px){.doc-wrap{grid-template-columns:1fr;padding:20px 14px 60px}.toc{display:none}.article{padding:22px 18px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-in">
+<div class="brand"><div class="logo">M</div><div><div class="brand-t">Mac 清单</div><div class="brand-s">Mac 软件清单 &amp; 使用技巧</div></div></div>
+<div class="topbar-sp"></div>
+<button class="icon-btn" id="theme" title="切换深浅色" aria-label="切换主题"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+<a class="gh-btn" href="../index.html">← 返回清单</a>
+</div></header>
+<div class="doc-wrap">
+<article class="article">
+<div class="crumb"><a href="../index.html">首页</a> / 操作与技巧 / Mac快捷键</div>
+<h1>Mac快捷键</h1><div class="meta">内容源自 qianguyihao/Mac-list · 02-软件操作/03-Mac快捷键.md</div>
+<div class="md-body"><h2 id="sec-0">Mac常用快捷键</h2>
+<h3 id="sec-1">Finder</h3>
+<div class="table-wrap"><table><thead><tr><th>快捷键</th><th>作用</th><th>备注</th></tr></thead><tbody><tr><td>Command + ↑</td><td>返回上一层</td></tr><tr><td>Command + ↓</td><td>进入当前文件夹</td></tr><tr><td>Shift + Command + G</td><td>前往指定路径的文件夹</td><td>包括隐藏文件夹</td></tr><tr><td>Shift + Command + .</td><td>显示隐藏文件、文件夹</td><td>再按一次，恢复隐藏</td></tr><tr><td>Command + K</td><td>链接服务器</td><td>通过它，可以连接网络邻居</td></tr></tbody></table></div>
+<h3 id="sec-2">编辑 | 删除文字</h3>
+<div class="table-wrap"><table><thead><tr><th>快捷键</th><th>作用</th><th>备注</th></tr></thead><tbody><tr><td>delete</td><td>删除光标的前一个字符</td><td>相当于 Windows 键盘上的退格键</td></tr><tr><td>fn + delete</td><td>删除光标的后一个字符</td></tr><tr><td>option + delete</td><td>删除光标之前的一个单词</td><td>英文有效</td></tr><tr><td><strong>command + delete</strong></td><td>删除光标之前的整行内容</td><td>【荐】</td></tr><tr><td>command + delete</td><td>在finder中删掉该文件</td></tr><tr><td>shift + command + delete</td><td>清空回收站</td></tr></tbody></table></div>
+<p><strong>剪切文件</strong>：</p>
+<p>首先选中文件，按Command+C复制文件；然后按「Command＋Option＋V」剪切文件。</p>
+<p>备注：Command+X只能剪切文字文本，不要混淆了。</p>
+<h2 id="sec-3">Mac用户必须知道的15组快捷键</h2>
+<h3 id="sec-4">「space」键：快速预览</h3>
+<p>选中文件后， 不需要启动任何应用程序，使用「space」空格键可进行快速预览，再次按下「space」空格键取消预览。</p>
+<p>可以预览mp3、视频、pdf等文件。</p>
+<p>我们还可以<strong>选中多张图片</strong>， 然后按「space」键，就可以同时对比预览多张图片。这一点，很赞。</p>
+<h3 id="sec-5">改名</h3>
+<p>选中文件/文件夹后，按enter键，就可以改名了。</p>
+<h3 id="sec-6">「command + I」键：查看文件属性</h3>
+<ul><li>选中文件后，按「command + I」键，可以查看文件的各种属性。</li></ul>
+<ul><li>选中<strong>文件夹</strong>后，按「command + I」键，可以查看文件夹的大小。【荐】</li></ul>
+<h3 id="sec-7">切换输入法</h3>
+<p>「control + space」</p>
+<h3 id="sec-8">打开 spotlight 搜索框</h3>
+<p>spotlight是系统自带的软件，搜索功能不是很强大。我们一般都会用第三方的 Alfred 软件。</p>
+<h3 id="sec-9">编辑相关</h3>
+<p>Cmd+C、Cmd+V、Cmd+X、Cmd+A、Cmd+Z。</p>
+<h3 id="sec-10">翻页和光标</h3>
+<ul><li>「control + ↑」：将光标定位到文章的最开头（翻页到文档的最上方）</li></ul>
+<ul><li>「control + ↓」：将光标定位到文章的最末尾（翻页到文档的最下方）</li></ul>
+<ul><li>「control + ←」：将光标定位到当前行的最左侧</li></ul>
+<ul><li>「control + →」：将光标定位到当前行的最右侧</li></ul>
+<h3 id="sec-11">「command + shift + Y」：将文字快速保存到便笺</h3>
+<p>选中你想要的内容（例如文字、链接等），然后按下「command + shift + Y」，那么你选中的内容就会快速保存到系统自带的「便笺」软件中。</p>
+<p>如果你想临时性的保存一段内容，这个操作很实用。</p>
+<h3 id="sec-12">程序相关</h3>
+<ul><li>「command + Q」：快速退出程序</li></ul>
+<ul><li>「command + tab」：切换程序</li></ul>
+<ul><li>「command + H」：隐藏当前应用程序。这是一个有趣的快捷键。</li></ul>
+<ul><li>「command + ，」：打开当前应用程序的「偏好设置」。</li></ul>
+<h3 id="sec-13">窗口相关</h3>
+<ul><li>「command + N」：新建一个当前应用程序的窗口</li></ul>
+<ul><li>「command + `」：在当前应用程序的不同窗口之间切换【很实用】</li></ul>
+<p>我们知道，「command + tab」是在不同的软件之间切换。但你不知道的是，「command + `」是在同一个软件的不同窗口之间切换。</p>
+<ul><li>「command + M」：将当前窗口最小化</li></ul>
+<ul><li>「command + W」：关闭当前窗口</li></ul>
+<h3 id="sec-14">浏览器相关</h3>
+<ul><li>「command + T」：浏览器中，新建一个标签</li></ul>
+<ul><li>「command + W」：关闭当前标签</li></ul>
+<ul><li>「command + R」：强制刷新。</li></ul>
+<ul><li>「command + L」：定位到地址栏。【重要】</li></ul>
+<h3 id="sec-15">截图相关</h3>
+<ul><li>「command + shift + 3」：截全屏（对整个屏幕截图）。</li></ul>
+<h3 id="sec-16">声音相关</h3>
+<p>选中文字后，按住「ctrl + esc」键，会将文字进行朗读。（我发现，在触控条版的mac上，并没有生效）</p>
+<h3 id="sec-17">Dock栏相关</h3>
+<ul><li>「option + command + D」：隐藏dock栏</li></ul>
+<h3 id="sec-18">强制退出</h3>
+<blockquote>强制退出的快捷键非常重要</blockquote>
+<ul><li>「option + command + esc」：打开强制退出的窗口</li></ul>
+<h3 id="sec-19">option相关</h3>
+<blockquote>强烈推荐</blockquote>
+<ul><li>「option + command + H」：隐藏除当前应用程序之外的其他应用程序</li></ul>
+<ul><li>在文本中，按住「option」键，配合鼠标的选中，可以进行块状文字选取。</li></ul>
+<ul><li>「option + command + W」：快速关闭当前应用程序的所有窗口。【很实用】</li></ul>
+<p>比如说，你一次性打开了很多文件的详情，然后就可以通过此快捷键，将这些窗口一次性关闭。</p>
+<ul><li>「option + command + I」：查看多个文件的总的属性。</li></ul>
+<ul><li>打开launchpad，按住「option」键，可以快速卸载应用程序。</li></ul>
+<ul><li>在dock栏，右键点击软件图标，同时按住「option」键，就可以<strong>强制退出</strong>该软件。【重要】</li></ul>
+<ul><li>在Safari浏览器中，按住「option + command + Q」退出Safari。等下次进入Safari的时候，上次退出时的网址会自动被打开。【实用】</li></ul>
+<h3 id="sec-20">推荐一个软件：CheatSheet</h3>
+<p>打开CheatSheet后，长按 command 键，会弹出当前应用程序的所有快捷键。我们还可以对这些快捷键进行保存。</p>
+<h2 id="sec-21">参考链接</h2>
+<ul><li><a href="http://v.youku.com/v_show/id_XNDE4MzM0NDgw.html" target="_blank" rel="noopener noreferrer">《轻松玩Mac》第6期：Mac用户必须知道的15组快捷键</a></li></ul></div>
+<div class="doc-nav"><a href="p14.html"><small>← 上一篇</small>Mac软件操作</a><a href="p16.html" style="text-align:right"><small>下一篇 →</small>Mac终端常用命令</a></div>
+</article>
+<aside class="toc"><b>本页目录</b><a class="" href="#sec-0">Mac常用快捷键</a><a class="lv3" href="#sec-1">Finder</a><a class="lv3" href="#sec-2">编辑 | 删除文字</a><a class="" href="#sec-3">Mac用户必须知道的15组快捷键</a><a class="lv3" href="#sec-4">「space」键：快速预览</a><a class="lv3" href="#sec-5">改名</a><a class="lv3" href="#sec-6">「command + I」键：查看文件属性</a><a class="lv3" href="#sec-7">切换输入法</a><a class="lv3" href="#sec-8">打开 spotlight 搜索框</a><a class="lv3" href="#sec-9">编辑相关</a><a class="lv3" href="#sec-10">翻页和光标</a><a class="lv3" href="#sec-11">「command + shift + Y」：将文字快速保存到便笺</a><a class="lv3" href="#sec-12">程序相关</a><a class="lv3" href="#sec-13">窗口相关</a><a class="lv3" href="#sec-14">浏览器相关</a><a class="lv3" href="#sec-15">截图相关</a><a class="lv3" href="#sec-16">声音相关</a><a class="lv3" href="#sec-17">Dock栏相关</a><a class="lv3" href="#sec-18">强制退出</a><a class="lv3" href="#sec-19">option相关</a><a class="lv3" href="#sec-20">推荐一个软件：CheatSheet</a><a class="" href="#sec-21">参考链接</a></aside>
+</div>
+<footer><div class="foot-in">内容源自 <a href="https://github.com/qianguyihao/Mac-list" target="_blank" rel="noopener noreferrer">qianguyihao/Mac-list</a>（作者：千古壹号），本站为非官方静态镜像。原仓库未声明开源许可证。</div></footer>
+<script>
+(function(){const d=document.documentElement,t=localStorage.getItem('ml-theme');
+if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))d.dataset.theme='dark';
+document.getElementById('theme').addEventListener('click',()=>{const x=d.dataset.theme==='dark';d.dataset.theme=x?'light':'dark';localStorage.setItem('ml-theme',x?'light':'dark');});})();
+</script>
+</body></html>
